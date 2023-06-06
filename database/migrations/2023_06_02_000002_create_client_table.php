@@ -9,12 +9,13 @@ class CreateClientTable extends Migration
     public function up()
     {
         Schema::create('client', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained('users');
+            $table->id(); 
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('company_name');
             $table->string('contact_person_name');
             $table->integer('contact_person_phone_number');
             $table->string('invoice_email_address');
-            $table->foreignId('invoice_address_id')->constrained('address');
+            $table->foreignId('invoice_address_id')->constrained('address')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ class CreateTaskTable extends Migration
             $table->foreignId('play_address_id')->constrained('address');
             $table->foreignId('makeup_address_id')->nullable()->constrained('address');
             $table->enum('status', ['lopend','inBehandeling','afgerond'])->default('lopend');
+            $table->enum('task_type', ['BHV', 'EHBO', 'Examen']);
             $table->foreignId('client_id')->constrained('client', 'user_id');
             $table->timestamps();
         });
