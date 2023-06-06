@@ -39,3 +39,6 @@ Route::middleware(['auth', 'role:coordinator'])->group(function () {
 // });
 // Route::delete('/admin/approvals/{user}', 'AdminApprovalController@destroy')->name('admin.approvals.destroy');
 
+Route::get('task',function(){
+return view('opdrachtgever.task');
+});
