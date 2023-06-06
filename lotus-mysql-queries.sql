@@ -7,90 +7,92 @@ DROP TABLE IF EXISTS `address`;
 
 CREATE TABLE `address`(
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `streetName` VARCHAR(50) NOT NULL,
-    `houseNumber` INT NOT NULL,
-    `postalCode` VARCHAR(50) NOT NULL,
+    `street_name` VARCHAR(50) NOT NULL,
+    `house_number` INT NOT NULL,
+    `postal_code` VARCHAR(50) NOT NULL,
     `city` VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE `user`(
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `fullName` VARCHAR(50) NOT NULL,
-    `emailAddress` VARCHAR(50) NOT NULL,
+    `full_name` VARCHAR(50) NOT NULL,
+    `email_address` VARCHAR(50) NOT NULL,
     `password` VARCHAR(50) NOT NULL,
-    `phoneNumber` INT NOT NULL,
-    `role` set('coordinator','opdrachtgever','lid') NOT NULL
+    `phone_number` INT NOT NULL,
+    `role` SET('coordinator','opdrachtgever','lid') NOT NULL,
+    `is_approved` BOOLEAN DEFAULT false
 );
 
 CREATE TABLE `client`(
-    `userId` INT NOT NULL PRIMARY KEY,
-    `companyName` VARCHAR(50) NOT NULL,
-    `contactPersonName` VARCHAR(50) NOT NULL,
-    `contactPersonPhoneNumber` INT NOT NULL,
-    `invoiceEmailAddress` VARCHAR(50) NOT NULL,
-    `addressId` INT NOT NULL,
-    FOREIGN KEY (`userId`) REFERENCES `user` (`id`),
-    FOREIGN KEY (`addressId`) REFERENCES `address` (`id`)
+    `user_id` INT NOT NULL PRIMARY KEY,
+    `company_name` VARCHAR(50) NOT NULL,
+    `contact_person_name` VARCHAR(50) NOT NULL,
+    `contact_person_phone_number` INT NOT NULL,
+    `invoice_email_address` VARCHAR(50) NOT NULL,
+    `invoice_address_id` INT NOT NULL,
+    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+    FOREIGN KEY (`invoice_address_id`) REFERENCES `address` (`id`)
 );
 
 CREATE TABLE `task`(
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `beginTime` TIME NOT NULL,
-    `endTime` TIME NOT NULL,
+    `begin_time` TIME NOT NULL,
+    `end_time` TIME NOT NULL,
     `date` DATE NOT NULL,
     `description` VARCHAR(255) NOT NULL,
-    `instructorName` VARCHAR(50) NOT NULL,
-    `taskNumber` INT NOT NULL,
-    `playAddressId` INT NOT NULL,
-	`makeupAddressId` INT,
+    `instructor_name` VARCHAR(50) NOT NULL,
+    `task_number` INT NOT NULL,
+    `play_address_id` INT NOT NULL,
+    `makeup_address_id` INT,
     `status` ENUM('lopend','inBehandeling','afgerond') NOT NULL DEFAULT 'lopend',
-    `clientId` INT NOT NULL,
-    FOREIGN KEY (`clientId`) REFERENCES `client` (`userId`),
-    FOREIGN KEY (`makeupAddressId`) REFERENCES `address` (`id`),
-    FOREIGN KEY (`playAddressId`) REFERENCES `address` (`id`)
+    `client_id` INT NOT NULL,
+    FOREIGN KEY (`client_id`) REFERENCES `client` (`user_id`),
+    FOREIGN KEY (`makeup_address_id`) REFERENCES `address` (`id`),
+    FOREIGN KEY (`play_address_id`) REFERENCES `address` (`id`)
 );
 
 CREATE TABLE `invoice`(
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `signature` VARCHAR(50) NOT NULL,
     `specifics` VARCHAR(255) NOT NULL,
-	`addressId` INT NOT NULL,
-    `taskId` INT NOT NULL,
-    FOREIGN KEY (`taskId`) REFERENCES `task` (`id`),
-    FOREIGN KEY (`addressId`) REFERENCES `address` (`id`)
+    `address_id` INT NOT NULL,
+    `task_id` INT NOT NULL,
+    FOREIGN KEY (`task_id`) REFERENCES `task` (`id`),
+    FOREIGN KEY (`address_id`) REFERENCES `address` (`id`)
 );
 
 CREATE TABLE `user_task`(
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `userId` INT NOT NULL,
+    `user_id` INT NOT NULL,
     `status` ENUM('geaccepteerd','geweigerd','misschien'),
     `admit` BOOLEAN,
-    `taskId` INT NOT NULL,
-    FOREIGN KEY (`userId`) REFERENCES `user` (`id`),
-    FOREIGN KEY (`taskId`) REFERENCES `task` (`id`)
+    `task_id` INT NOT NULL,
+    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+    FOREIGN KEY (`task_id`) REFERENCES `task` (`id`)
 );
-INSERT INTO `address` (`streetName`, `houseNumber`, `postalCode`, `city`) VALUES 
+
+INSERT INTO `address` (`street_name`, `house_number`, `postal_code`, `city`) VALUES 
 ('Hoofdstraat', 123, '1234 AB', 'Amsterdam'),
 ('Zijstraat', 456, '5678 CD', 'Rotterdam');
 
-INSERT INTO `user` (`fullName`, `emailAddress`, `password`, `phoneNumber`, `role`) VALUES 
+INSERT INTO `user` (`full_name`, `email_address`, `password`, `phone_number`, `role`) VALUES 
 ('Piet Pietersen', 'piet.pietersen@email.com', 'password456', 612345678, 'opdrachtgever'),
 ('Marie Marijnsen', 'marie.marijnsen@email.com', 'password012', 612345679, 'coordinator'),
 ('Jan Janssen', 'jan.janssen@email.com', 'password123', 612345680, 'lid');
 
-INSERT INTO `client` (`userId`, `companyName`, `contactPersonName`, `contactPersonPhoneNumber`, `invoiceEmailAddress`, `addressId`) VALUES 
+INSERT INTO `client` (`user_id`, `company_name`, `contact_person_name`, `contact_person_phone_number`, `invoice_email_address`, `invoice_address_id`) VALUES 
 (1, 'TestCo', 'Mike Lijten', 698765432, 'mikelijten@invoice.com', 1),
 (2, 'VoorbeeldBV', 'John Doe', 698765433, 'johndoe@invoice.com', 2);
 
-INSERT INTO `task` (`beginTime`, `endTime`, `date`, `description`, `instructorName`, `taskNumber`, `playAddressId`, `makeupAddressId`, `status`, `clientId`) VALUES 
+INSERT INTO `task` (`begin_time`, `end_time`, `date`, `description`, `instructor_name`, `task_number`, `play_address_id`, `makeup_address_id`, `status`, `client_id`) VALUES 
 ('09:30:00', '10:30:00', '2023-05-31', 'Test taak', 'koen van steen, mohammed samadov', 123456, 1, NULL, 'inBehandeling', 1),
 ('10:45:00', '11:45:00', '2023-06-01', 'Voorbeeld taak', 'koen van steen, mohammed samadov', 123457, 2, NULL, 'inBehandeling', 2);
 
-INSERT INTO `invoice` (`signature`, `specifics`, `addressId`, `taskId`) VALUES 
+INSERT INTO `invoice` (`signature`, `specifics`, `address_id`, `task_id`) VALUES 
 ('Ondertekening 1', 'Bijzonderheden 1', 1, 1),
 ('Ondertekening 2', 'Bijzonderheden 2', 2, 2);
 
-INSERT INTO `user_task` (`userId`, `status`, `admit`, `taskId`) VALUES 
+INSERT INTO `user_task` (`user_id`, `status`, `admit`, `task_id`) VALUES 
 (3, 'geaccepteerd', true, 1),
 (3, 'geaccepteerd', true, 2);
 
