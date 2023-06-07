@@ -23,10 +23,21 @@
                     <td>{{ $task->id }}</td>
                     <td>{{ $task->status }}</td>
                     <td>
-                        <form action="{{ route('admin.approvals.approveAssignment', $task) }}" method="post">
-                            @csrf
-                            <button type="submit">Goedkeuren</button>
-                        </form>
+                        @if ($task->status === 'inBehandeling')
+                            <form action="{{ route('admin.approvals.approveAssignment', $task) }}" method="post">
+                                @csrf
+                                <button type="submit">Accepteren</button>
+                            </form>
+                        @elseif ($task->status === 'lopend')
+                            <form action="{{ route('admin.approvals.inviteMember', $task) }}" method="get">
+                                @csrf
+                                <button type="submit">Leden uitnodigen</button>
+                            </form>
+                        @elseif ($task->status === 'afgerond')
+                            <p>afgerond</p>
+                        @else
+                            <p>Fout</p>
+                        @endif
                     </td>
                 </tr>
             @endforeach

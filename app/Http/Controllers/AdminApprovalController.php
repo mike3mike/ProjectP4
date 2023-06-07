@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Task;
 use App\Notifications\UserApproved;
+use App\Notifications\AssignmentApproved;
 
 
 class AdminApprovalController extends Controller
@@ -46,8 +47,15 @@ class AdminApprovalController extends Controller
     {
         $task->status = 'lopend';
         $task->save(); // Keur de opdracht goed en sla het op
-        //$task->notify(new UserApproved());
+        $userId = $task->client_id;
+        $users = User::where('id', $userId)->get();
+        // $users->notify(new AssignmentApproved());
         return back()->with('status', 'Opdracht goedgekeurd.'); // Keer terug naar de vorige pagina met een succesbericht
+    }
+
+    public function inviteMember(Task $task)
+    {
+
     }
 
 }
