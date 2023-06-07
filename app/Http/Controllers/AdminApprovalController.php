@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Task;
 use App\Notifications\UserApproved;
 
 
@@ -33,5 +34,20 @@ class AdminApprovalController extends Controller
 
     return back()->with('status', 'Gebruiker verwijderd.'); // Keer terug naar de vorige pagina met een succesbericht
 }
+
+    public function getAssignmentRequests()
+    {
+        $tasks = Task::get(); // Haal de opdrachten op die nog niet geaccepteerd zijn
+
+        return view('admin.approvals.newAssignmentOverview', compact('tasks')); // Toon de view met de opdrachten
+    }
+
+    public function approveAssignment(Task $task)
+    {
+        $task->status = 'lopend';
+        $task->save(); // Keur de opdracht goed en sla het op
+        //$task->notify(new UserApproved());
+        return back()->with('status', 'Opdracht goedgekeurd.'); // Keer terug naar de vorige pagina met een succesbericht
+    }
 
 }

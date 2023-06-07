@@ -25,11 +25,12 @@ Route::get('/approval-pending', function () {
     return view('approval_pending');
 });
 
-
 Route::middleware(['auth', 'role:coordinator'])->group(function () {
     Route::get('/admin/approvals', [AdminApprovalController::class, 'index'])->name('admin.approvals.index');
     Route::post('/admin/approvals/{user}', [AdminApprovalController::class, 'approve'])->name('admin.approvals.approve');
     Route::delete('/admin/approvals/{user}', [AdminApprovalController::class, 'destroy'])->name('admin.approvals.delete');
+    Route::get('/admin/new-assignments', [AdminApprovalController::class, 'getAssignmentRequests'])->name('admin.approvals.getAssignmentsRequests');
+    Route::post('/admin/new-assignments/{task}', [AdminApprovalController::class, 'approveAssignment'])->name('admin.approvals.approveAssignment');
 });
 
 
