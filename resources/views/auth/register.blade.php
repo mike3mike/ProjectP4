@@ -155,7 +155,7 @@
                                 <input id="postal_code" type="text" placeholder="Voer uw postcode in" class="form-control @error('postal_code') is-invalid @enderror" name="postal_code" value="{{ old('postal_code') }}">
                                 @error('postal_code')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ $message .' nnnn<spatie>MM'}}</strong>
                                     </span>
                                 @enderror
                         

@@ -52,6 +52,16 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      * 
      */
+    /**
+     * o Een ingevoerde postcode wordt altijd als volgt geformatteerd en opgeslagen
+             (we gaan in dit project uit van Nederlandse postcodes):
+                        nnnn<spatie>MM, waarbij:
+                    - nnnn 4 numerieke digits zijn
+                    - de eerste digit van nnnn mag niet het digit 0 zijn
+                    - hierna precies één spatie
+                    - gevolgd door twee hoofdletters.
+
+     */
     protected function validator(array $data)
 {
     $rules = [
@@ -65,11 +75,12 @@ class RegisterController extends Controller
     if(isset($data['role']) && $data['role'] === 'opdrachtgever'){
         $rules['street'] = ['required', 'string', 'max:255'];
         $rules['city'] = ['required', 'string', 'max:255'];
-        $rules['postal_code'] = ['required', 'string', 'max:255'];
+        $rules['postal_code'] = ['required', 'string','regex:/^[1-9][0-9]{3}\s[A-Z]{2}$/'];
         $rules['house_number'] = ['required', 'numeric'];
         $rules['company_name'] = ['required', 'string', 'max:255'];
         $rules['billing_email'] = ['required', 'string', 'email', 'max:255'];
         $rules['contact_person'] = ['required', 'string', 'max:255'];
+        $rules['contact_person_phone']=['required', 'digits:10'];
     }
 
     return Validator::make($data, $rules);
