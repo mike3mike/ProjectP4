@@ -10,7 +10,10 @@
                 <label for="opdrachtnaam">Opdrachtnaam:</label>
                 <input type="text" id="opdrachtnaam" name="opdrachtnaam" class="form-control" required>
             </div>
-
+            <div class="form-group">
+                <label for="opdrachtnummer">Opdrachtnummer:</label>
+                <input type="text" id="opdrachtnummer" name="opdrachtnummer" class="form-control" required>
+            </div>
             <div class="form-group">
                 <label for="datum">Datum:</label>
                 <input type="date" id="datum" name="datum" class="form-control" required>
