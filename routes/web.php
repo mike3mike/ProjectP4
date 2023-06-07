@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminApprovalController;
+use App\Http\Controllers\TaskController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +40,9 @@ Route::middleware(['auth', 'role:coordinator'])->group(function () {
 // });
 // Route::delete('/admin/approvals/{user}', 'AdminApprovalController@destroy')->name('admin.approvals.destroy');
 
-Route::get('task',function(){
-return view('opdrachtgever.task');
-});
+// Route::get('task',function(){
+// return view('opdracht.task');
+// });
+Route::post('task', [TaskController::class, 'store'])->name('task.store');
+Route::get('task', [TaskController::class, 'index'])->name('task.index');
+Route::get('task/create', [TaskController::class, 'create'])->name('task.create');
