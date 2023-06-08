@@ -12,7 +12,7 @@ class CreateUserTaskTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->enum('status', ['geaccepteerd','geweigerd','misschien'])->nullable();
-            $table->boolean('admit');
+            $table->boolean('admit')->nullable();
             $table->foreignId('task_id')->constrained('task');
             $table->foreignId('assigned_by')->constrained('users');  // Toevoegen van 'assigned_by' kolom
 
