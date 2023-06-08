@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Models\UserTask;
 use App\Notifications\UserApproved;
 use App\Notifications\AssignmentApproved;
+use App\Notifications\TaskAccepted;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -27,6 +28,9 @@ class UserController extends Controller
     {
         $userTask->status = 'geaccepteerd';
         $userTask->save(); // Accepteer de opdracht goed en sla het op
+        $coordinator = User::find($userTask->assigned_by);
+        $user = User::find($userTask->user_id);
+        $coordinator->notify(new TaskAccepted($userTask->task, $userTask->status, $user));
         return back()->with('status', 'Opdracht geaccepteerd.'); // Keer terug naar de vorige pagina met een succesbericht
     }
 
@@ -34,13 +38,19 @@ class UserController extends Controller
     {
         $userTask->status = 'misschien';
         $userTask->save(); // Accepteer de opdracht goed en sla het op
-        return back()->with('status', 'Opdracht op ik weet het niet gezet.'); // Keer terug naar de vorige pagina met een succesbericht
+        $coordinator = User::find($userTask->assigned_by);
+        $user = User::find($userTask->user_id);
+        $coordinator->notify(new TaskAccepted($userTask->task, $userTask->status, $user));    
+        return back()->with('status', 'Opdracht op misschien gezet.');  return back()->with('status', 'Opdracht op ik weet het niet gezet.'); // Keer terug naar de vorige pagina met een succesbericht
     }
 
     public function decline(UserTask $userTask)
     {
         $userTask->status = 'geweigerd';
         $userTask->save(); // Accepteer de opdracht goed en sla het op
+        $coordinator = User::find($userTask->assigned_by);
+        $user = User::find($userTask->user_id);
+        $coordinator->notify(new TaskAccepted($userTask->task, $userTask->status, $user)); 
         return back()->with('status', 'Opdracht geweigerd.'); // Keer terug naar de vorige pagina met een succesbericht
     }
 }
