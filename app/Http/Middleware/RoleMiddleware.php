@@ -17,17 +17,19 @@ class RoleMiddleware
     //...$roles
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        // if (! Auth::check() || $request->user()->role != $role) 
-        if (! Auth::check() || ! in_array($request->user()->role, $roles)){
-            // De gebruiker is niet ingelogd of heeft niet de juiste rol.
-            // Je kunt hier ook een redirect naar een andere pagina uitvoeren als je dat wilt.
+        // Controleren of de gebruiker is ingelogd
+        if (! Auth::check()){
             abort(403, 'U heeft geen toegang tot deze pagina.');
-        
         }
 
+        $user = Auth::user();
+
+        // Controleren of de gebruiker een van de vereiste rollen heeft
+        if (!$user->roles()->whereIn('name', $roles)->exists()) {
+            // De gebruiker heeft niet de vereiste rol
+            abort(403, 'U heeft geen toegang tot deze pagina.');
+        }
 
         return $next($request);
     }
-
 }
-
