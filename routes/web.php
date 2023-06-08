@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/overview', [App\Http\Controllers\COverviewController::class, 'index'])->name('overview');
 
 Route::get('/approval-pending', function () {
     return view('approval_pending');
@@ -38,4 +39,3 @@ Route::middleware(['auth', 'role:coordinator'])->group(function () {
 //     Route::post('/admin/approvals/{user}', 'AdminApprovalController@approve')->name('admin.approvals.approve');
 // });
 // Route::delete('/admin/approvals/{user}', 'AdminApprovalController@destroy')->name('admin.approvals.destroy');
-
