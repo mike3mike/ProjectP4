@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminApprovalController;
 use App\Http\Controllers\TaskController;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,19 +27,21 @@ Route::get('/approval-pending', function () {
     return view('approval_pending');
 });
 
-
 Route::middleware(['auth', 'role:coordinator'])->group(function () {
     Route::get('/admin/approvals', [AdminApprovalController::class, 'index'])->name('admin.approvals.index');
     Route::post('/admin/approvals/{user}', [AdminApprovalController::class, 'approve'])->name('admin.approvals.approve');
     Route::delete('/admin/approvals/{user}', [AdminApprovalController::class, 'destroy'])->name('admin.approvals.delete');
+    Route::get('/admin/new-assignments', [AdminApprovalController::class, 'getAssignmentRequests'])->name('admin.approvals.getAssignmentsRequests');
+    Route::post('/admin/new-assignments/{task}', [AdminApprovalController::class, 'approveAssignment'])->name('admin.approvals.approveAssignment');
+    Route::get('/admin/new-assignments/{task}', [AdminApprovalController::class, 'inviteMember'])->name('admin.approvals.inviteMember');
 });
 
-
-// Route::middleware(['auth', 'role:coordinator'])->group(function () {
-//     Route::get('/admin/approvals', 'AdminApprovalController@index')->name('admin.approvals.index');
-//     Route::post('/admin/approvals/{user}', 'AdminApprovalController@approve')->name('admin.approvals.approve');
-// });
-// Route::delete('/admin/approvals/{user}', 'AdminApprovalController@destroy')->name('admin.approvals.destroy');
+Route::middleware(['auth', 'role:lid'])->group(function () {
+    Route::get('/member/open-assignments', [UserController::class, 'index'])->name('member.openAssignments.index');
+    Route::post('/member/open-assignments/accept/{userTask}', [UserController::class, 'accept'])->name('member.openAssignments.accept');
+    Route::post('/member/open-assignments/maybe/{userTask}', [UserController::class, 'maybe'])->name('member.openAssignments.maybe');
+    Route::post('/member/open-assignments/decline/{userTask}', [UserController::class, 'decline'])->name('member.openAssignments.decline');
+});
 
 // Route::get('task',function(){
 // return view('opdracht.task');
