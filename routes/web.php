@@ -50,4 +50,6 @@ Route::post('task', [TaskController::class, 'store'])->name('task.store');
 Route::get('task', [TaskController::class, 'index'])->name('task.index');
 Route::get('task/create', [TaskController::class, 'create'])->name('task.create');
 Route::post('/task/become_client', [TaskController::class, 'submitBecomeClient'])->name('task.submit_become_client');
+Route::get('/task/{id}', [TaskController::class, 'show'])->name('task.show');
+Route::get('/task/{id}', [TaskController::class, 'showAdmin'])->name('task.show_task_details_admin');
 

@@ -97,9 +97,10 @@ class RegisterController extends Controller
 protected function create(array $data)
 {
     try {
+        // dd($data);
         // Start a database transaction
         DB::beginTransaction();
-
+    
         // User aanmaken
         $user = User::create([
             'name' => $data['name'],
@@ -107,12 +108,13 @@ protected function create(array $data)
             'password' => Hash::make($data['password']),
             'phone_number' => $data['phoneNumber'],
         ]);
+      
             // Rol ophalen
             $role = Role::where('name', $data['role'])->firstOrFail();
-
+          
             // Rol toewijzen aan gebruiker
             $user->roles()->attach($role);
-
+           
         // Controleer of de rol van de gebruiker een 'opdrachtgever' is
         if ($data['role'] == 'opdrachtgever') {
             // Adres aanmaken

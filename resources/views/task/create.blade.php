@@ -46,7 +46,10 @@
                 <label for="kader_instructeur">Kader instructeur:</label>
                 <input type="text" id="kader_instructeur" name="kader_instructeur" class="form-control" required>
             </div>
-
+            <div class="form-group">
+                <label for="max_users">Maximaal aantal deelnemers:</label>
+                <input type="text" id="max_users" name="max_users" class="form-control" required>
+            </div>
 
             <div class="form-group">
                 <label for="speellocatie_naam">Speellocatie naam:</label>

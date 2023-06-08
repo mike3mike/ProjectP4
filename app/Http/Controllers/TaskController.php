@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Models\User;
 use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
+use App\Notifications\TaskCreated;
 
 
 class TaskController extends Controller
@@ -51,6 +53,7 @@ class TaskController extends Controller
         'begintijd' => 'required|date_format:H:i',
         'eindtijd' => 'required|date_format:H:i',
         'description' => 'required|string',
+        'max_users' => 'required|numeric',
         'same_address' => 'sometimes',
         'griemlocatie' => 'nullable|array',
         'griemlocatie.city' => 'sometimes|required|string',
@@ -63,29 +66,6 @@ class TaskController extends Controller
     if ($validator->fails()) {
         return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
-    // $validatedData = $request->validate([
-    //     'opdrachtnaam' => 'required',
-    //     'opdrachtnummer' => 'required',
-    //     'datum' => 'required|date',
-    //     'kader_instructeur' => 'required',
-    //     'speellocatie_naam' => 'required',
-    //     'speellocatie' => 'required|array',
-    //     'speellocatie.city' => 'required',
-    //     'speellocatie.street' => 'required',
-    //     'speellocatie.house_number' => 'required',
-    //     'speellocatie.postcode' => 'required',
-    //     'begintijd' => 'required',
-    //     'eindtijd' => 'required',
-    //     'description' => 'required',
-    //     'same_address' => 'sometimes',
-    //     'griemlocatie' => 'nullable|array',
-    //     'griemlocatie.city' => 'sometimes|required',
-    //     'griemlocatie.street' => 'sometimes|required',
-    //     'griemlocatie.house_number' => 'sometimes|required',
-    //     'griemlocatie.postcode' => 'sometimes|required',
-    //     'soort_opdracht' => 'required|array',
-    //     'soort_opdracht.*' => 'in:BHV,EHBO,Examen',           
-    // ]);
       // Get the validated data from the validator
       $validatedData = $validator->validated();
 
@@ -98,8 +78,15 @@ class TaskController extends Controller
             ? $playLocation 
             : $this->createAddress($validatedData['griemlocatie']);
         
-        $this->createTask($validatedData, $playLocation->id, $makeupLocation->id);
+            $task = $this->createTask($validatedData, $playLocation->id, $makeupLocation->id);
 
+        // Stuur een e-mail naar de coördinator wanneer een nieuwe taak wordt aangemaakt
+        $coordinator = User::whereHas('roles', function ($query) {
+            $query->where('name', 'coordinator');
+        })->first(); // haal de coördinator op. 
+                if ($coordinator) {
+                      $coordinator->notify(new TaskCreated($task));
+                }
         DB::commit();
 
         return redirect()->route('task.index')->with('success', 'Opdracht succesvol aangemaakt!');
@@ -137,11 +124,39 @@ private function createTask($data, $playLocationId, $makeupLocationId)
     $task->end_time = $data['eindtijd'];
     $task->task_type = $taskTypes;
     $task->description = $data['description'];
+    $task->max_users = $data['max_users'];
     $task->play_address_id = $playLocationId;
     $task->makeup_address_id = $makeupLocationId;
     $task->client_id = Auth::id();
 
     $task->save();
+    return $task;
+}
+public function show($id)
+{
+    // Eager load de relaties om extra database queries te vermijden
+    $task = Task::with(['playAddress', 'makeupAddress'])->find($id);
+
+    // Als de taak niet wordt gevonden, stuur dan een 404 response
+    if (!$task) {
+        abort(404);
+    }
+
+    // Return de view voor het tonen van een taak
+    return view('task.show', compact('task'));
+}
+public function showAdmin($id)
+{
+    // Eager load de relaties om extra database queries te vermijden
+    $task = Task::with(['playAddress', 'makeupAddress','client'])->find($id);
+
+    // Als de taak niet wordt gevonden, stuur dan een 404 response
+    if (!$task) {
+        abort(404);
+    }
+
+    // Return de view voor het tonen van een taak
+    return view('task.show_task_details_admin', compact('task'));
 }
 public function submitBecomeClient(Request $request)
 {

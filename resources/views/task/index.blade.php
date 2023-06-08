@@ -16,8 +16,9 @@
             <tr>
                 <th>Opdrachtnaam</th>
                 <th>Opdrachtnummer</th>
-                <th>status</th>
-                <!-- Voeg hier extra kolommen toe voor elke attribuut die je wilt weergeven -->
+                <th>Status</th>
+                <th>Acties</th>
+    
             </tr>
         </thead>
         <tbody>
@@ -26,7 +27,10 @@
                     <td>{{ $task->task_name }}</td>
                     <td>{{ $task->task_number }}</td>
                     <td>{{ $task->status }}</td>
-                    <!-- Zorg ervoor dat je de waarden van de extra attributen hier ook toevoegt -->
+                 
+                    <td>
+                        <a href="{{ route('task.show', $task->id) }}" class="btn btn-info">Bekijk Details</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

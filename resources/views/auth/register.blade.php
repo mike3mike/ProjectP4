@@ -237,12 +237,6 @@ window.onload = function() {
             toggleExtraFields(false);
         }
     };
-
-
-
-
-
-
 </script>
 </body>
 </html>

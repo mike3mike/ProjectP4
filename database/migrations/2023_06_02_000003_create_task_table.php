@@ -16,10 +16,11 @@ class CreateTaskTable extends Migration
             $table->string('description');
             $table->string('instructor_name');
             $table->integer('task_number');
+            $table->integer('max_users');
             $table->string('play_address_name');
             $table->foreignId('play_address_id')->constrained('address');
             $table->foreignId('makeup_address_id')->nullable()->constrained('address');
-            $table->enum('status', ['lopend','inBehandeling','afgerond'])->default('lopend');
+            $table->enum('status', ['inBehandeling','lopend','afgerond'])->default('inBehandeling');
             $table->json('task_type');
             $table->foreignId('client_id')->constrained('client', 'user_id');
             $table->timestamps();
