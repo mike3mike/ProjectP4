@@ -31,7 +31,7 @@
                                     <button type="submit" class="btn btn-primary">Accepteren</button>
                                 </form>
                             @elseif ($task->status === 'lopend')
-                                <form action="{{ route('admin.approvals.inviteMember', $task) }}" method="get">
+                                <form action="{{ route('admin.invite', $task) }}" method="get">
                                     @csrf
                                     <button type="submit" class="btn btn-primary">Leden uitnodigen</button>
                                 </form>
