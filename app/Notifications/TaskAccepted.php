@@ -12,11 +12,13 @@ class TaskAccepted extends Notification
     use Queueable;
 
     private $task;
-
-    public function __construct($task, $status)
+    private $status;
+    private $user;
+    public function __construct($task, $status,$user)
     {
         $this->task = $task;
         $this->status = $status;
+        $this->user = $user;
     }
  
     
@@ -30,8 +32,8 @@ class TaskAccepted extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('De opdracht '.$this->task->name.' is '.$this->status.'.')
-                ->action('Bekijk de opdracht', url('/'))
+                    ->line('De opdracht '.$this->task->name.' is '.$this->status.' door '.$this->user->name.'.')
+                    ->action('Bekijk de opdracht', url('/'))
                     ->line('Bedankt voor het gebruiken van onze applicatie!');
     }
 }
