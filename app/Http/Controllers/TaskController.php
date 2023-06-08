@@ -7,6 +7,9 @@ use App\Models\Task;
 use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 
 class TaskController extends Controller
@@ -34,29 +37,58 @@ class TaskController extends Controller
     }
     public function store(Request $request)
 {
-    $validatedData = $request->validate([
-        'opdrachtnaam' => 'required',
-        'opdrachtnummer' => 'required',
-        'datum' => 'required|date',
+    $validator = Validator::make($request->all(), [
+        'opdrachtnaam' => 'required|string',
+        'opdrachtnummer' => 'required|numeric',
+        'datum' => ['required', 'date', 'after_or_equal:' . Carbon::today()->format('Y-m-d')],
         'kader_instructeur' => 'required',
-        'speellocatie_naam' => 'required',
+        'speellocatie_naam' => 'required|string',
         'speellocatie' => 'required|array',
-        'speellocatie.city' => 'required',
-        'speellocatie.street' => 'required',
-        'speellocatie.house_number' => 'required',
-        'speellocatie.postcode' => 'required',
-        'begintijd' => 'required',
-        'eindtijd' => 'required',
-        'description' => 'required',
+        'speellocatie.city' => 'required|string',
+        'speellocatie.street' => 'required|string',
+        'speellocatie.house_number' => 'required|numeric',
+        'speellocatie.postcode' => 'required|regex:/^[1-9][0-9]{3}\s[A-Z]{2}$/',
+        'begintijd' => 'required|date_format:H:i',
+        'eindtijd' => 'required|date_format:H:i',
+        'description' => 'required|string',
         'same_address' => 'sometimes',
         'griemlocatie' => 'nullable|array',
-        'griemlocatie.city' => 'sometimes|required',
-        'griemlocatie.street' => 'sometimes|required',
+        'griemlocatie.city' => 'sometimes|required|string',
+        'griemlocatie.street' => 'sometimes|required|string',
         'griemlocatie.house_number' => 'sometimes|required',
         'griemlocatie.postcode' => 'sometimes|required',
-        'soort_opdracht' => 'required|array',
-        'soort_opdracht.*' => 'in:BHV,EHBO,Examen',           
+        'soort_opdracht' => ['required', 'array', Rule::in(['BHV', 'EHBO', 'Examen'])],           
     ]);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+    // $validatedData = $request->validate([
+    //     'opdrachtnaam' => 'required',
+    //     'opdrachtnummer' => 'required',
+    //     'datum' => 'required|date',
+    //     'kader_instructeur' => 'required',
+    //     'speellocatie_naam' => 'required',
+    //     'speellocatie' => 'required|array',
+    //     'speellocatie.city' => 'required',
+    //     'speellocatie.street' => 'required',
+    //     'speellocatie.house_number' => 'required',
+    //     'speellocatie.postcode' => 'required',
+    //     'begintijd' => 'required',
+    //     'eindtijd' => 'required',
+    //     'description' => 'required',
+    //     'same_address' => 'sometimes',
+    //     'griemlocatie' => 'nullable|array',
+    //     'griemlocatie.city' => 'sometimes|required',
+    //     'griemlocatie.street' => 'sometimes|required',
+    //     'griemlocatie.house_number' => 'sometimes|required',
+    //     'griemlocatie.postcode' => 'sometimes|required',
+    //     'soort_opdracht' => 'required|array',
+    //     'soort_opdracht.*' => 'in:BHV,EHBO,Examen',           
+    // ]);
+     
+    // Get the validated data from the validator
+      $validatedData = $validator->validated();
 
     DB::beginTransaction();
 
@@ -75,8 +107,8 @@ class TaskController extends Controller
 
     } catch (\Exception $e) {
         DB::rollBack();
-
-        return back()->withErrors(['error' => 'Er is een fout opgetreden bij het aanmaken van de opdracht. Probeer het opnieuw.']);
+        throw $e;
+        // return back()->withErrors(['error' => 'Er is een fout opgetreden bij het aanmaken van de opdracht. Probeer het opnieuw.']);
     }
 }
 
@@ -112,4 +144,18 @@ private function createTask($data, $playLocationId, $makeupLocationId)
 
     $task->save();
 }
+public function submitBecomeClient(Request $request)
+{
+    $rules['street'] = ['required', 'string', 'max:255'];
+    $rules['city'] = ['required', 'string', 'max:255'];
+    $rules['postal_code'] = ['required', 'string','regex:/^[1-9][0-9]{3}\s[A-Z]{2}$/'];
+    $rules['house_number'] = ['required', 'numeric'];
+    $rules['company_name'] = ['required', 'string', 'max:255'];
+    $rules['billing_email'] = ['required', 'string', 'email', 'max:255'];
+    $rules['contact_person'] = ['required', 'string', 'max:255'];
+    $rules['contact_person_phone']=['required', 'digits:10'];
+
+    return redirect()->route('task.index')->with('success', 'Je aanvraag om een opdrachtgever te worden is in behandeling genomen.');
+}
+
 }
