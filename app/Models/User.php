@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,7 +21,6 @@ class User extends Authenticatable
         'email',
         'password',
         'phone_number',
-        'role',
     ];
 
     /**
@@ -45,12 +43,23 @@ class User extends Authenticatable
         'password' => 'hashed',
         'is_approved' => 'boolean',
     ];
-    
+
     public function client() 
     {
         return $this->hasOne(Client::class, 'user_id');
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function hasRole($role)
+    {
+        return $this->roles()->where('name', $role)->exists();
+    }
 }
+
 
 // namespace App\Models;
 
