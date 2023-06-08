@@ -24,18 +24,29 @@
                 <input type="text" id="opdrachtnummer" name="opdrachtnummer" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="description">description:</label>
+                <label for="description">Beschrijving:</label>
                 <input type="text" id="description" name="description" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="datum">Datum:</label>
                 <input type="date" id="datum" name="datum" class="form-control" required>
             </div>
+            
+            <div class="form-group">
+                <label for="begintijd">Begintijd:</label>
+                <input type="time" id="begintijd" name="begintijd" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="eindtijd">Eindtijd:</label>
+                <input type="time" id="eindtijd" name="eindtijd" class="form-control" required>
+            </div>
 
             <div class="form-group">
                 <label for="kader_instructeur">Kader instructeur:</label>
                 <input type="text" id="kader_instructeur" name="kader_instructeur" class="form-control" required>
             </div>
+
 
             <div class="form-group">
                 <label for="speellocatie_naam">Speellocatie naam:</label>
@@ -59,17 +70,6 @@
                 <label for="postcode">Postcode:</label>
                 <input type="text" id="postcode" name="speellocatie[postcode]" class="form-control" required>
             </div>
-
-            <div class="form-group">
-                <label for="begintijd">Begintijd:</label>
-                <input type="time" id="begintijd" name="begintijd" class="form-control" required>
-            </div>
-
-            <div class="form-group">
-                <label for="eindtijd">Eindtijd:</label>
-                <input type="time" id="eindtijd" name="eindtijd" class="form-control" required>
-            </div>
-
             <h2>Griemadres:</h2>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="1" id="same_address" name="same_address">

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminApprovalController;
 use App\Http\Controllers\TaskController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,3 +47,5 @@ Route::middleware(['auth', 'role:coordinator'])->group(function () {
 Route::post('task', [TaskController::class, 'store'])->name('task.store');
 Route::get('task', [TaskController::class, 'index'])->name('task.index');
 Route::get('task/create', [TaskController::class, 'create'])->name('task.create');
+Route::post('/task/become_client', [TaskController::class, 'submitBecomeClient'])->name('task.submit_become_client');
+

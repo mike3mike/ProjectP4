@@ -11,7 +11,7 @@ class CreateUserTaskTable extends Migration
         Schema::create('user_task', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->enum('status', ['geaccepteerd','geweigerd','misschien']);
+            $table->enum('status', ['geaccepteerd','geweigerd','misschien'])->nullable();
             $table->boolean('admit');
             $table->foreignId('task_id')->constrained('task');
             $table->timestamps();

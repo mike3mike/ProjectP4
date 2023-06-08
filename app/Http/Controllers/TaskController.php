@@ -86,8 +86,7 @@ class TaskController extends Controller
     //     'soort_opdracht' => 'required|array',
     //     'soort_opdracht.*' => 'in:BHV,EHBO,Examen',           
     // ]);
-     
-    // Get the validated data from the validator
+      // Get the validated data from the validator
       $validatedData = $validator->validated();
 
     DB::beginTransaction();

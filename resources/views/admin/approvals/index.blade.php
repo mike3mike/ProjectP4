@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1 class="my-3">Aanvragen</h1>
+        <h1 class="my-3">Aangevraagde Accounts</h1>
 
         @if (session('status'))
             <div class="alert alert-success">
@@ -24,7 +24,8 @@
                     <tr>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->role }}</td>
+                        <td>{{ $user->roles->pluck('name')->implode(', ') }}</td>
+
                         <td>
                             <div class="d-flex">
                                 <form action="{{ route('admin.approvals.approve', $user) }}" method="post" class="mr-2">
