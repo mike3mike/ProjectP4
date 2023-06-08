@@ -16,4 +16,8 @@ class Client extends Model
     public function address() {
         return $this->belongsTo(Address::class, 'invoice_address_id');
     }
+    // public function tasks() {
+    //     return $this->hasMany(Task::class, 'client_id', 'user_id');
+    // }
+    
 }
