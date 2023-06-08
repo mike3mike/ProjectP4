@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\User;
+use App\Models\UserTask;
 use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,7 @@ use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\TaskCreated;
+use App\Notifications\InvitationSent;
 
 
 class TaskController extends Controller
@@ -148,7 +150,7 @@ public function show($id)
 public function showAdmin($id)
 {
     // Eager load de relaties om extra database queries te vermijden
-    $task = Task::with(['playAddress', 'makeupAddress','client'])->find($id);
+    $task = Task::with(['playAddress', 'makeupAddress','client.user'])->find($id);
 
     // Als de taak niet wordt gevonden, stuur dan een 404 response
     if (!$task) {
@@ -171,5 +173,47 @@ public function submitBecomeClient(Request $request)
 
     return redirect()->route('task.index')->with('success', 'Je aanvraag om een opdrachtgever te worden is in behandeling genomen.');
 }
+public function invite(Task $task)
+{
+    $users = User::all(); // Haal alle gebruikers op
+
+    return view('admin.approvals.invite', [
+        'task' => $task,
+        'users' => $users,
+    ]);
+}
+
+public function sendInvitation(Request $request, Task $task)
+{
+    // Valideer eerst de aanvraag
+    $validatedData = $request->validate([
+        'users' => ['required', 'array'],
+        'users.*' => ['exists:users,id'],
+    ]);
+
+    // Haal de geselecteerde gebruikers op
+    $users = User::whereIn('id', $validatedData['users'])->get();
+
+    // Stuur een uitnodiging naar elk van de geselecteerde gebruikers
+    foreach ($users as $user) {
+        // Maak een nieuwe UserTask voor deze uitnodiging
+        $userTask = new UserTask([
+            'user_id' => $user->id,
+            'task_id' => $task->id,
+            'assigned_by' => Auth::id(), // Zorg ervoor dat de ingelogde gebruiker de toewijzing heeft gedaan
+            'status' => 'misschien', 
+            'admit' => false // admit kan leeg blijven totdat de gebruiker het treugstuurt
+        ]);
+
+        // Sla de UserTask op in de database
+        $userTask->save();
+
+        // Stuur een melding
+        $user->notify(new InvitationSent($task));
+    }
+
+    return redirect()->route('admin.approvals.getAssignmentsRequests')->with('status', 'Uitnodiging(en) verzonden!');
+}
+
 
 }
