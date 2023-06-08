@@ -53,3 +53,5 @@ Route::post('/task/become_client', [TaskController::class, 'submitBecomeClient']
 Route::get('/task/{id}', [TaskController::class, 'show'])->name('task.show');
 Route::get('/task/{id}', [TaskController::class, 'showAdmin'])->name('task.show_task_details_admin');
 
+Route::get('admin/{task}/invite', [TaskController::class, 'invite'])->name('admin.invite');
+Route::post('admin/{task}/invite', [TaskController::class, 'sendInvitation'])->name('admin.sendInvitation');
