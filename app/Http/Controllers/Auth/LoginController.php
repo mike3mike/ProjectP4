@@ -22,7 +22,7 @@ class LoginController extends Controller
     use AuthenticatesUsers;
     protected function authenticated(Request $request, $user)
     {
-        if($user->role == 'coordinator') {
+        if($user->hasRole('coordinator')) {
             // Als de gebruiker een 'coordinator' is, stuur ze dan naar de admin-pagina
             return redirect('/admin/approvals');
         } else if(!$user->is_approved) {
@@ -36,6 +36,7 @@ class LoginController extends Controller
             return redirect('/approval-pending');
         }
     }
+    
 
     // protected function authenticated(Request $request, $user)
     // {
