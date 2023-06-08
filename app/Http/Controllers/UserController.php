@@ -34,7 +34,7 @@ class UserController extends Controller
     {
         $userTask->status = 'misschien';
         $userTask->save(); // Accepteer de opdracht goed en sla het op
-        return back()->with('status', 'Opdracht op ik weet het niet.'); // Keer terug naar de vorige pagina met een succesbericht
+        return back()->with('status', 'Opdracht op ik weet het niet gezet.'); // Keer terug naar de vorige pagina met een succesbericht
     }
 
     public function decline(UserTask $userTask)
