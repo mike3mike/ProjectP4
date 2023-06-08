@@ -47,11 +47,11 @@ class AdminApprovalController extends Controller
     {
         $task->status = 'lopend';
         $task->save(); // Keur de opdracht goed en sla het op
-        $userId = $task->client_id;
-        $users = User::where('id', $userId)->get();
-        // $users->notify(new AssignmentApproved());
+        $user = User::find($task->client_id);
+        $user->notify(new AssignmentApproved($task));
         return back()->with('status', 'Opdracht goedgekeurd.'); // Keer terug naar de vorige pagina met een succesbericht
     }
+    
 
     public function inviteMember(Task $task)
     {

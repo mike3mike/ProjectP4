@@ -11,46 +11,23 @@ class AssignmentApproved extends Notification
 {
     use Queueable;
 
-    /**
-     * Create a new notification instance.
-     */
-    public function __construct()
+    private $task;
+
+    public function __construct($task)
     {
-        //
+        $this->task = $task;
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @return array<int, string>
-     */
-    public function via(object $notifiable): array
+    public function via($notifiable)
     {
         return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     */
-    public function toMail(object $notifiable): MailMessage
+    public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('Er is een opdracht goedgekeurd')
-                    ->action('Bekijk uw opdrachten', route('home'))
-
-                    // ->action('Bekijk je account', url('/'))
-                    ->line('Bedankt voor uw aanvraag!');
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(object $notifiable): array
-    {
-        return [
-            //
-        ];
+                    ->line('Uw opdracht '.$this->task->name.' is goedgekeurd.')
+                    ->action('Bekijk de opdracht', url('/'))
+                    ->line('Bedankt voor het gebruiken van onze applicatie!');
     }
 }
