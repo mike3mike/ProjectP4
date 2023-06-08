@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -105,8 +106,12 @@ protected function create(array $data)
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone_number' => $data['phoneNumber'],
-            'role' => $data['role'],
         ]);
+            // Rol ophalen
+            $role = Role::where('name', $data['role'])->firstOrFail();
+
+            // Rol toewijzen aan gebruiker
+            $user->roles()->attach($role);
 
         // Controleer of de rol van de gebruiker een 'opdrachtgever' is
         if ($data['role'] == 'opdrachtgever') {
