@@ -161,7 +161,22 @@ public function showAdmin($id)
     return view('task.show_task_details_admin', compact('task'));
 }
 public function submitBecomeClient(Request $request)
+
 {
+    $user = Auth::user();
+
+    // Controleer of de gebruiker al de rol 'opdrachtgever' heeft
+    if($user->hasRole('opdrachtgever')) {
+        // Controleer of de aanvraag van de gebruiker al is goedgekeurd
+        if($user->is_approved) {
+            // Als de aanvraag van de gebruiker is goedgekeurd, stuur ze dan door naar de 'task.create' route
+            return redirect()->route('task.create');
+        } else {
+            // Als de aanvraag van de gebruiker nog niet is goedgekeurd, laat ze dan weten dat ze moeten wachten op goedkeuring
+            return back()->with('info', 'Je aanvraag om opdrachtgever te worden is nog in behandeling. Wacht alstublieft op goedkeuring.');
+        }
+    }
+
     $rules['street'] = ['required', 'string', 'max:255'];
     $rules['city'] = ['required', 'string', 'max:255'];
     $rules['postal_code'] = ['required', 'string','regex:/^[1-9][0-9]{3}\s[A-Z]{2}$/'];
@@ -171,11 +186,54 @@ public function submitBecomeClient(Request $request)
     $rules['contact_person'] = ['required', 'string', 'max:255'];
     $rules['contact_person_phone']=['required', 'digits:10'];
 
+    $validatedData = $request->validate($rules);
+
+    $address = new Address([
+        'street' => $validatedData['street'],
+        'city' => $validatedData['city'],
+        'postal_code' => $validatedData['postal_code'],
+        'house_number' => $validatedData['house_number'],
+    ]);
+
+    $address->save();
+
+    $user = Auth::user();
+
+    $client = new Client([
+        'user_id' => $user->id,
+        'company_name' => $validatedData['company_name'],
+        'invoice_email_address' => $validatedData['billing_email'],
+        'contact_person_name' => $validatedData['contact_person'],
+        'contact_person_phone_number' => $validatedData['contact_person_phone'],
+        'invoice_address_id' => $address->id,
+    ]);
+
+    $user->client()->save($client);
+
+     // Opslaan van de rol 'opdrachtgever' voor de gebruiker
+     $role = Role::where('name', 'opdrachtgever')->first();
+     $user->roles()->attach($role);
+
     return redirect()->route('task.index')->with('success', 'Je aanvraag om een opdrachtgever te worden is in behandeling genomen.');
 }
+// public function invite(Task $task)
+// {
+//     $users = User::all(); // Haal alle gebruikers op
+
+//     return view('admin.approvals.invite', [
+//         'task' => $task,
+//         'users' => $users,
+//     ]);
+// }
 public function invite(Task $task)
 {
-    $users = User::all(); // Haal alle gebruikers op
+    $users = User::whereHas('roles', function ($query) {
+                $query->whereIn('name', ['lid', 'coordinator']);
+            })  // Haal alleen leden en coördinatoren op
+            ->whereDoesntHave('userTasks', function ($query) use ($task) {
+                $query->where('task_id', $task->id);
+            })  // Haal alleen gebruikers op die nog niet voor deze taak zijn uitgenodigd
+            ->get();
 
     return view('admin.approvals.invite', [
         'task' => $task,
@@ -200,9 +258,9 @@ public function sendInvitation(Request $request, Task $task)
         $userTask = new UserTask([
             'user_id' => $user->id,
             'task_id' => $task->id,
-            'assigned_by' => Auth::id(), // Zorg ervoor dat de ingelogde gebruiker de toewijzing heeft gedaan
-            'status' => 'misschien', 
-            'admit' => false // admit kan leeg blijven totdat de gebruiker het treugstuurt
+            'assigned_by' => Auth::id() // Zorg ervoor dat de ingelogde gebruiker de toewijzing heeft gedaan
+            // 'status' => 'misschien', 
+            // 'admit' => false // admit kan leeg blijven totdat de gebruiker het treugstuurt
         ]);
 
         // Sla de UserTask op in de database
@@ -214,6 +272,5 @@ public function sendInvitation(Request $request, Task $task)
 
     return redirect()->route('admin.approvals.getAssignmentsRequests')->with('status', 'Uitnodiging(en) verzonden!');
 }
-
 
 }
