@@ -19,4 +19,5 @@ class UserTask extends Model
     public function coordinator() {
         return $this->belongsTo(User::class, 'assigned_by');
     }
+    
 }
