@@ -18,7 +18,7 @@ class RoleMiddleware
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
         // Controleren of de gebruiker is ingelogd
-        if (! Auth::check()){
+        if (!Auth::check()) {
             abort(403, 'U heeft geen toegang tot deze pagina.');
         }
 

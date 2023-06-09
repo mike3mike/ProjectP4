@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminApprovalController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +36,7 @@ Route::middleware(['auth', 'role:coordinator'])->group(function () {
     Route::delete('/admin/approvals/{user}', [AdminApprovalController::class, 'destroy'])->name('admin.approvals.delete');
     Route::get('/admin/new-assignments', [AdminApprovalController::class, 'getAssignmentRequests'])->name('admin.approvals.getAssignmentsRequests');
     Route::post('/admin/new-assignments/{task}', [AdminApprovalController::class, 'approveAssignment'])->name('admin.approvals.approveAssignment');
+    Route::delete('/admin/new-assignments/{task}', [AdminApprovalController::class, 'declineAssignment'])->name('admin.approvals.declineAssignment');
     Route::get('/admin/new-assignments/{task}', [AdminApprovalController::class, 'inviteMember'])->name('admin.approvals.inviteMember');
     Route::get('/admin/task/{id}', [TaskController::class, 'showAdmin'])->name('task.show_task_details_admin');
     Route::get('admin/{task}/invite', [TaskController::class, 'invite'])->name('admin.invite');
@@ -69,5 +71,3 @@ Route::middleware(['auth', 'role:opdrachtgever'])->group(function () {
 
 
 Route::post('/task/become_client', [TaskController::class, 'submitBecomeClient'])->name('task.submit_become_client');
-
-
