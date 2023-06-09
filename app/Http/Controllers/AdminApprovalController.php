@@ -12,29 +12,59 @@ class AdminApprovalController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:coordinator'); // Zorg ervoor dat alleen admins toegang hebben
+        $this->middleware('role:coordinator'); // Zorg ervoor dat alleen coördinators toegang hebben
     }
 
     public function index()
     {
-        $users = User::where('is_approved', false)->get(); // Haal de gebruikers op die nog niet zijn goedgekeurd
-
-        return view('admin.approvals.index', compact('users')); // Toon de view met deze gebruikers
+        $members = User::whereHas('roles', function ($query) {
+            $query->where('name', 'lid');
+        })->where('is_approved_member', false)->get();
+    
+        $clients = User::whereHas('roles', function ($query) {
+            $query->where('name', 'opdrachtgever');
+        })->where('is_approved_client', false)->get();
+    
+        $coordinators = User::whereHas('roles', function ($query) {
+            $query->where('name', 'coordinator');
+        })->where('is_approved_coordinator', false)->get();
+    
+        return view('admin.approvals.index', compact('members', 'clients', 'coordinators')); // Toon de view met deze gebruikers
     }
 
-    public function approve(User $user)
+  
+   public function approveMember(User $user)
     {
-        $user->is_approved = true;
-        $user->save(); // Keur de gebruiker goed en sla het op
+        $user->is_approved_member = true;
+        $user->save(); // Keur de lid goed en sla het op
         $user->notify(new UserApproved());
-        return back()->with('status', 'Gebruiker goedgekeurd.'); // Keer terug naar de vorige pagina met een succesbericht
+        return back()->with('status', 'Lid goedgekeurd.'); // Keer terug naar de vorige pagina met een succesbericht
     }
-    public function destroy(User $user)
-{
-    $user->delete(); // Verwijder de gebruiker
 
-    return back()->with('status', 'Gebruiker verwijderd.'); // Keer terug naar de vorige pagina met een succesbericht
-}
+    public function approveClient(User $user)
+    {
+        $user->is_approved_client = true;
+        $user->save(); // Keur de opdrachtgever goed en sla het op
+        $user->notify(new UserApproved());
+        return back()->with('status', 'Opdrachtgever goedgekeurd.'); // Keer terug naar de vorige pagina met een succesbericht
+    }
+
+    public function approveCoordinator(User $user)
+    {
+        $user->is_approved_coordinator = true;
+        $user->save(); // Keur de coördinator goed en sla het op
+        $user->notify(new UserApproved());
+        return back()->with('status', 'Coördinator goedgekeurd.'); // Keer terug naar de vorige pagina met een succesbericht
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete(); // Verwijder de gebruiker
+
+        return back()->with('status', 'Gebruiker verwijderd.'); // Keer terug naar de vorige pagina met een succesbericht
+    }
+
+
 
     public function getAssignmentRequests()
     {
@@ -52,10 +82,5 @@ class AdminApprovalController extends Controller
         return back()->with('status', 'Opdracht goedgekeurd.'); // Keer terug naar de vorige pagina met een succesbericht
     }
     
-
-    public function inviteMember(Task $task)
-    {
-
-    }
-
 }
+
