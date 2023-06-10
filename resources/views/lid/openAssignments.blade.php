@@ -3,12 +3,17 @@
 @section('content')
     <div class="container">
         <h1 class="my-3">Uitnodigingen</h1>
-
+        <a href="{{ route('member.check_client_status') }}" class="btn btn-primary">Nieuwe Opdracht</a>
         @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
             </div>
         @endif
+        @if (session('warning'))
+        <div class="alert alert-warning">
+            {{ session('warning') }}
+        </div>
+    @endif
 
         <table class="table table-bordered table-striped">
             <thead>
