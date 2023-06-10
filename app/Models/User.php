@@ -22,6 +22,11 @@ class User extends Authenticatable
         'password',
         'phone_number',
     ];
+    private static $role_approval_mapping = [
+        'lid' => 'is_approved_member',
+        'opdrachtgever' => 'is_approved_client',
+        'coordinator' => 'is_approved_coordinator',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -62,6 +67,29 @@ class User extends Authenticatable
 {
     return $this->hasMany(UserTask::class);
 }
+// public function getApprovalAttributeForRole($roleName)
+// {
+//     $attribute = self::$role_approval_mapping[strtolower($roleName)] ?? null;
+
+//     if ($attribute) {
+//         return $this->{$attribute};
+//     }
+
+//     throw new InvalidArgumentException("Unknown role: $roleName");
+// }
+public function getApprovalAttributeForRole($roleName)
+{
+    $attribute = self::$role_approval_mapping[strtolower($roleName)] ?? null;
+
+    if ($attribute) {
+        return $attribute;
+    }
+
+    throw new InvalidArgumentException("Unknown role: $roleName");
+}
+
+
+
 
 }
 
