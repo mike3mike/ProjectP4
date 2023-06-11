@@ -26,11 +26,11 @@ class UserController extends Controller
     public function index()
     {
         $userTasks = UserTask::where('user_id', Auth::id())->get();
-        return view('lid.openAssignments', compact('userTasks')); // Toon de view met de opdrachten die bij deze user horen
+        return view('member.openAssignments', compact('userTasks')); // Toon de view met de opdrachten die bij deze user horen
     }
     public function memberBecomeClient()
     {
-        return view('lid.become_client'); // Toon de view met de opdrachten die bij deze user horen
+        return view('member.become_client'); // Toon de view met de opdrachten die bij deze user horen
     }
   
     public function accept(UserTask $userTask)
@@ -142,7 +142,7 @@ public function checkClientStatus()
             // Als de aanvraag van de gebruiker al is goedgekeurd...
             if($user->is_approved_client) {
 
-                // Stuur ze dan naar de 'task.create' route
+                // Stuur ze dan naar de 'client.create' route
                 return redirect()->route('task.create');
 
             } else {

@@ -77,7 +77,7 @@ public function showAdmin($id)
     }
 
     // Return de view voor het tonen van een taak
-    return view('task.show_task_details_admin', compact('task'));
+    return view('admin.tasks.show_task_details_admin', compact('task'));
 }
 public function finishTask(Task $task)
 {

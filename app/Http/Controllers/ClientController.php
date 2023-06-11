@@ -34,12 +34,12 @@ class ClientController extends Controller
         $tasks = Task::where('client_id', Auth::id())->get();
         // $opdrachten = Task::all();
 
-        return view('task.index', compact('tasks'));
+        return view('client.index', compact('tasks'));
     }
     public function create()
     {
         // Return de view voor het aanmaken van een opdracht
-        return view('task.create');
+        return view('client.create');
     }
     public function store(Request $request)
 {
@@ -147,7 +147,7 @@ public function show($id)
     }
 
     // Return de view voor het tonen van een taak
-    return view('task.show', compact('task'));
+    return view('client.show', compact('task'));
 }
 
 
