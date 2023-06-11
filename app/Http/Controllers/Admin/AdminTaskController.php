@@ -9,13 +9,14 @@ use App\Models\User;
 use App\Models\UserTask;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\InvitationSent;
+use App\Notifications\TaskFinished;
 
 class AdminTaskController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:admin');
+        $this->middleware('role:coordinator');
     }
     
 public function invite(Task $task)
@@ -78,4 +79,21 @@ public function showAdmin($id)
     // Return de view voor het tonen van een taak
     return view('task.show_task_details_admin', compact('task'));
 }
+public function finishTask(Task $task)
+{
+    // Update de status naar 'afgerond'
+    $task->status = 'afgerond';
+    $task->save();
+
+    // Stuur een notificatie naar de opdrachtgever
+    $client = User::find($task->client_id);
+
+    // Controleer of de client bestaat voordat je de notificatie stuurt
+    if ($client) {
+        $client->notify(new TaskFinished($task));
+    }
+
+    return redirect()->back()->with('status', 'De opdracht is succesvol afgerond en de opdrachtgever is genotificeerd!');
+}
+
 }
