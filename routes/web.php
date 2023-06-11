@@ -27,7 +27,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/approval-pending', function () {
-    return view('approval_pending');
+    return view('admin.approvals.approval_pending');
 });
 
 Route::middleware(['auth', 'role:coordinator'])->group(function () {
@@ -45,7 +45,11 @@ Route::middleware(['auth', 'role:coordinator'])->group(function () {
     Route::get('/admin/role-requests', [RoleRequestController::class, 'index'])->name('admin.role-requests.index');
     Route::post('/admin/role-requests/{user}/{role}/approve',  [RoleRequestController::class, 'approve'])->name('admin.role-requests.approve');
     Route::post('/admin/role-requests/{user}/{role}/deny', [RoleRequestController::class, 'deny'])->name('admin.role-requests.deny');
-    
+    Route::get('/admin/tasks', [AdminMemberTaskController::class, 'index'])->name('admin.tasks.index');
+    Route::post('/admin/tasks/{userTask}/approve', [AdminMemberTaskController::class, 'approve'])->name('admin.tasks.approve');
+    Route::post('/admin/tasks/{userTask}/remove', [AdminMemberTaskController::class, 'remove'])->name('admin.tasks.remove');
+    Route::get('/admin/tasks/{userTask}/details', [AdminMemberTaskController::class, 'details'])->name('admin.tasks.details');
+    Route::post('/admin/tasks/{task}/finish', [AdminTaskController::class, 'finishTask'])->name('admin.finishTask');  
 });
 
 Route::middleware(['auth', 'role:lid,coordinator'])->group(function () {
@@ -65,10 +69,6 @@ Route::middleware(['auth', 'role:opdrachtgever'])->group(function () {
 });
 
 
-Route::get('/admin/tasks', [AdminMemberTaskController::class, 'index'])->name('admin.tasks.index');
-Route::post('/admin/tasks/{userTask}/approve', [AdminMemberTaskController::class, 'approve'])->name('admin.tasks.approve');
-Route::post('/admin/tasks/{userTask}/remove', [AdminMemberTaskController::class, 'remove'])->name('admin.tasks.remove');
-Route::get('/admin/tasks/{userTask}/details', [AdminMemberTaskController::class, 'details'])->name('admin.tasks.details');
-Route::post('/admin/tasks/{task}/finish', [AdminTaskController::class, 'finishTask'])->name('admin.finishTask');
+
 
 

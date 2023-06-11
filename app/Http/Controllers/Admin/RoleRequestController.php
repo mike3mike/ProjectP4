@@ -49,16 +49,7 @@ class RoleRequestController extends Controller
 
         return redirect()->route('admin.role-requests.index')->with('success', 'Rol aanvraag goedgekeurd.');
     }
-    // public function deny(User $user, Role $role)
-    // {
-    //     $roleName = strtolower($role->name);
-    //     $user->{"is_approved_Client"} = false;
-    //     $user->save();
-    
-    //     $user->notify(new UserRoleDenied($role));
-    
-    //     return redirect()->route('admin.role-requests.index')->with('success', 'Rol aanvraag geweigerd.');
-    // }
+
     public function deny(User $user, Role $role)
 {
     $roleName = strtolower($role->name);
