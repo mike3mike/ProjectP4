@@ -14,11 +14,26 @@
         <li class="list-group-item">Contactpersoon Telefoonnummer: {{ $task->client->contact_person_phone_number }}</li>
         <li class="list-group-item">Factuur E-mailadres: {{ $task->client->invoice_email_address }}</li>
         
-        <!-- User details -->
-        <li class="list-group-item">Gebruikersnaam: {{ $task->client->user->name }}</li>
+        <!-- Client details -->
+        <li class="list-group-item">Opdrachtgever naam: {{ $task->client->user->name }}</li>
         <li class="list-group-item">E-mail van opdrachtgever: {{ $task->client->user->email }}</li>
         <li class="list-group-item">Telefoonnummer van opdrachtgever: {{ $task->client->user->phone_number }}</li>
-        
+        <h2 class="mt-5">Gebruikers die deelnemen aan deze opdracht:</h2>
+        <div class="row">
+            @foreach($task->userTasks()->where('admit', true)->where('status', 'geaccepteerd')->get() as $userTask)
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $userTask->user->name }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ $userTask->user->email }}</h6>
+                        <p class="card-text">Phone Number: {{ $userTask->user->phone_number }}</p>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
     </ul>
 </div>
 @endsection
+
+
