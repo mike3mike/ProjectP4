@@ -23,4 +23,8 @@ class Task extends Model
     public function playAddress() {
         return $this->belongsTo(Address::class, 'play_address_id');
     }
+    public function userTasks()
+{
+    return $this->hasMany(UserTask::class);
+}
 }
