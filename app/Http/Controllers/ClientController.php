@@ -26,7 +26,7 @@ class ClientController extends Controller
 
         // Alleen gebruikers met de rol 'opdrachtgever' kunnen toegang hebben tot de methoden van deze controller
         $this->middleware('role:opdrachtgever,coordinator');
-        $this->middleware('approved_for_role:opdrachtgever,coordinator');
+        $this->middleware('approved_for_role:opdrachtgever');
      
     }
     public function index()
