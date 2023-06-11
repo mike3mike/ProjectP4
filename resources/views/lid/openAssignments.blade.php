@@ -18,9 +18,9 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>info1</th>
-                    <th>info2</th>
-                    <th>info3</th>
+                    <th>taskId</th>
+                    <th>status</th>
+                    <th>admit</th>
                     <th>Acties</th>
                 </tr>
             </thead>
