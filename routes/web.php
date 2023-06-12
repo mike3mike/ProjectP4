@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\RoleRequestController;
 use App\Http\Controllers\Admin\AdminMemberTaskController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,7 +50,7 @@ Route::middleware(['auth', 'role:coordinator'])->group(function () {
     Route::post('/admin/tasks/{userTask}/approve', [AdminMemberTaskController::class, 'approve'])->name('admin.tasks.approve');
     Route::post('/admin/tasks/{userTask}/remove', [AdminMemberTaskController::class, 'remove'])->name('admin.tasks.remove');
     Route::get('/admin/tasks/{userTask}/details', [AdminMemberTaskController::class, 'details'])->name('admin.tasks.details');
-    Route::post('/admin/tasks/{task}/finish', [AdminTaskController::class, 'finishTask'])->name('admin.finishTask');  
+    Route::post('/admin/tasks/{task}/finish', [AdminTaskController::class, 'finishTask'])->name('admin.finishTask');
 });
 
 Route::middleware(['auth', 'role:lid,coordinator'])->group(function () {
@@ -59,7 +60,7 @@ Route::middleware(['auth', 'role:lid,coordinator'])->group(function () {
     Route::post('/member/open-assignments/decline/{userTask}', [UserController::class, 'decline'])->name('member.openAssignments.decline');
     Route::post('/member/become_client', [UserController::class, 'submitBecomeClient'])->name('task.submit_become_client');
     Route::get('/member/become_client', [UserController::class, 'memberBecomeClient'])->name('member.become_client');
-    Route::get('/member/check_client_status',[UserController::class, 'checkClientStatus'])->name('member.check_client_status');
+    Route::get('/member/check_client_status', [UserController::class, 'checkClientStatus'])->name('member.check_client_status');
 });
 Route::middleware(['auth', 'role:opdrachtgever'])->group(function () {
     Route::post('/client/task', [ClientController::class, 'store'])->name('task.store');
@@ -67,8 +68,3 @@ Route::middleware(['auth', 'role:opdrachtgever'])->group(function () {
     Route::get('/client/task/create', [ClientController::class, 'create'])->name('task.create');
     Route::get('/client//task/{id}', [ClientController::class, 'show'])->name('task.show');
 });
-
-
-
-
-
