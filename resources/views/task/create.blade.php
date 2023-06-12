@@ -122,14 +122,17 @@
 $(document).ready(function(){
     // Bewaar de originele HTML van het 'griemadres' gedeelte
     var griemadresHTML = $('#griemadres').html();
+    $('#griemadres input').attr('required', true);
 
     $('#same_address').change(function(){
         if(this.checked) {
             // Verwijder het 'griemadres' gedeelte uit het formulier
             $('#griemadres').html('');
+            $('#griemadres input').attr('required', false);
         } else {
             // Voeg het 'griemadres' gedeelte weer toe aan het formulier
             $('#griemadres').html(griemadresHTML);
+            $('#griemadres input').attr('required', true);
         }
     });
 });
