@@ -25,8 +25,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/overview', [App\Http\Controllers\COverviewController::class, 'index'])->name('overview');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/approval-pending', function () {
     return view('admin.approvals.approval_pending');
