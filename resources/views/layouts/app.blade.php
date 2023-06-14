@@ -151,12 +151,12 @@
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="/admin/approvals/" class="nav-link ">
+            <a href="/admin/approvals" class="nav-link ">
                 <p>beheren</p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="/admin/approvals/newAssignment" class="nav-link">
+            <a href="/admin/new-assignments" class="nav-link">
                 <p>toevoegen</p>
             </a>
         </li>
@@ -165,7 +165,7 @@
     </ul>
 </li>
 <li class="nav-item menu-open">
-    <a href="/role-requests/" class="nav-link ">
+    <a href="/admin/role-requests" class="nav-link ">
         <p>
             toegang
             <i class="right fas fa-angle-left"></i>
@@ -174,7 +174,7 @@
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="/role-requests/" class="nav-link ">
+            <a href="/admin/role-requests" class="nav-link ">
                 <p>rol aanvragen</p>
             </a>
         </li>
