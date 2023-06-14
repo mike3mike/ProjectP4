@@ -123,28 +123,8 @@
               <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                   <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-         @auth('admin')
-         <li class="nav-item menu-open">
-    <a href="#" class="nav-link ">
-        <p>
-            leden
-            <i class="right fas fa-angle-left"></i>
-        </p>
-    </a>
-    <ul class="nav nav-treeview">
-        <li class="nav-item">
-            <a href="./index.html" class="nav-link ">
-                <p>beheren</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="./index2.html" class="nav-link">
-                <p>toevoegen</p>
-            </a>
-        </li>
-
-    </ul>
-</li>
+    @if($user->hasRole('coordinator')) 
+  
 <li class="nav-item menu-open">
     <a href="/admin/tasks" class="nav-link ">
         <p>
@@ -205,9 +185,11 @@
 
 
 </li>
+    @endif
+
              
-         @endauth
-         @auth('lid')
+        @if($user->hasRole('lid')) 
+
         <li class="nav-item menu-open">
     <a class="nav-link ">
         <p>
@@ -226,8 +208,9 @@
 
     </ul>
 </li>
-         @endauth
-         @auth('opdrachtgever')
+@endif
+    @if($user->hasRole('opdrachtgever')) 
+
          <li class="nav-item menu-open">
     <a class="nav-link ">
         <p>
@@ -257,8 +240,9 @@
 
     </ul>
 </li>
-         @endauth
-          </nav>
+@endif
+
+</nav>
           <!-- /.sidebar-menu -->
       </div>
       <!-- /.sidebar -->
