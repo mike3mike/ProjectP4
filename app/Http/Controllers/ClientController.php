@@ -45,7 +45,7 @@ class ClientController extends Controller
 {
     $validator = Validator::make($request->all(), [
         'opdrachtnaam' => 'required|string',
-        'opdrachtnummer' => 'required|numeric',
+        'opdrachtnummer' => 'required|numeric|max_digits:11',
         'datum' => ['required', 'date', 'after_or_equal:' . Carbon::today()->format('Y-m-d')],
         'kader_instructeur' => 'required',
         'speellocatie_naam' => 'required|string',
@@ -53,7 +53,7 @@ class ClientController extends Controller
         'speellocatie.city' => 'required|string',
         'speellocatie.street' => 'required|string',
         'speellocatie.house_number' => 'required|numeric',
-        'speellocatie.postcode' => 'required|regex:/^[1-9][0-9]{3}\s[A-Z]{2}$/',
+        'speellocatie.postcode' => ['required', 'regex:/^([0-9]{4} ?[A-Z]{2})|([0-9]{4} ?[a-z]{2})$/'],
         'begintijd' => 'required|date_format:H:i',
         'eindtijd' => 'required|date_format:H:i',
         'description' => 'required|string',
@@ -63,7 +63,7 @@ class ClientController extends Controller
         'griemlocatie.city' => 'sometimes|required|string',
         'griemlocatie.street' => 'sometimes|required|string',
         'griemlocatie.house_number' => 'sometimes|required',
-        'griemlocatie.postcode' => 'sometimes|required',
+        'griemlocatie.postcode' => ['sometimes','required','regex:/^([0-9]{4} ?[A-Z]{2})|([0-9]{4} ?[a-z]{2})$/'],
         'soort_opdracht' => ['required', 'array', Rule::in(['BHV', 'EHBO', 'Examen'])],           
     ]);
 
