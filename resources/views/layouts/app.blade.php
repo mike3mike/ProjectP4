@@ -115,7 +115,7 @@
               <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                   <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-    @if(Auth::user()->hasRole('coordinator')) 
+    @if(Auth::user()->hasRole('coordinator') AND Auth::user()->where('is_approved_coordinator', true)->exists() )
   
     <li class="nav-item menu-open">
     <a href="" class="nav-link ">
@@ -126,7 +126,8 @@
     </a>
     <ul class="nav nav-treeview">
 <li class="nav-item menu-open">
-    <a href="" class="nav-link ">
+        
+    <a  class="nav-link ">
         <p>
             Opdrachten
             <i class="right fas fa-angle-left"></i>
@@ -138,39 +139,25 @@
                 <p>Beheren</p>
             </a>
         </li>
-
-
     </ul>
-</li>
-</ul>
-
-    <ul class="nav nav-treeview">
-<li class="nav-item menu-open">
-    <a href="" class="nav-link ">
-        <p>
-            Bevestigingen
-            <i class="right fas fa-angle-left"></i>
-        </p>
-    </a>
-  
-        <ul class="nav nav-treeview">
+         <ul class="nav nav-treeview">
 
         <li class="nav-item">
             <a href="/admin/new-assignments" class="nav-link">
-                <p>Toevoegen</p>
+                <p>aanvragen zien</p>
             </a>
         </li>
     </ul>
 
-
 </li>
     </ul>
+
 
     <ul class="nav nav-treeview">
 <li class="nav-item menu-open">
     <a href="" class="nav-link ">
         <p>
-            Toegang
+            gebruikers
             <i class="right fas fa-angle-left"></i>
         </p>
 
@@ -191,6 +178,13 @@
                 <p>Account aanvragen</p>
             </a>
         </li>
+    </ul> 
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/admin/members" class="nav-link ">
+                    <p>beheren</p>
+                </a>
+            </li>
     </ul>
 
 
@@ -202,7 +196,7 @@
     @endif
 
              
-        @if(Auth::user()->hasRole('lid')) 
+    @if(Auth::user()->hasRole('lid') AND Auth::user()->where('is_approved_member', true)->exists() )
        <li class="nav-item menu-open">
     <a class="nav-link ">
         <p>
@@ -233,7 +227,7 @@
         </ul>
        </li>
 @endif
-    @if(Auth::user()->hasRole('opdrachtgever')) 
+    @if(Auth::user()->hasRole('opdrachtgever') AND Auth::user()->where('is_approved_client', true)->exists() )
      <li class="nav-item menu-open">
     <a class="nav-link ">
         <p>
@@ -254,7 +248,7 @@
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="/client" class="nav-link">
+            <a href="/client/task" class="nav-link">
                 <p>Overzicht</p>
             </a>
         </li>
@@ -264,7 +258,7 @@
     </ul>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="/client/create" class="nav-link">
+            <a href="/client/task/create" class="nav-link">
                 <p>Aanmaken</p>
             </a>
         </li>
