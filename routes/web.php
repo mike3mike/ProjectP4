@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminApprovalController;
 use App\Http\Controllers\Admin\AdminTaskController;
 use App\Http\Controllers\Admin\RoleRequestController;
 use App\Http\Controllers\Admin\AdminMemberTaskController;
+use App\Http\Controllers\Admin\PlayformController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +52,8 @@ Route::middleware(['auth', 'role:coordinator'])->group(function () {
     Route::post('/admin/tasks/{userTask}/remove', [AdminMemberTaskController::class, 'remove'])->name('admin.tasks.remove');
     Route::get('/admin/tasks/{userTask}/details', [AdminMemberTaskController::class, 'details'])->name('admin.tasks.details');
     Route::post('/admin/tasks/{task}/finish', [AdminTaskController::class, 'finishTask'])->name('admin.finishTask');
+    // test
+    Route::get('/admin/tasks/{task}/showTask', [AdminMemberTaskController::class, 'showTask'])->name('admin.tasks.showTask');
 });
 
 Route::middleware(['auth', 'role:lid,coordinator'])->group(function () {
@@ -68,3 +71,13 @@ Route::middleware(['auth', 'role:opdrachtgever'])->group(function () {
     Route::get('/client/task/create', [ClientController::class, 'create'])->name('task.create');
     Route::get('/client//task/{id}', [ClientController::class, 'show'])->name('task.show');
 });
+
+Route::get('downloadPDF', function(){
+    return view('ex');
+});
+Route::get('/download-playform', [PlayformController::class, 'downloadPlayform']);
+Route::get('/tasks/{task}/show', function(){
+    return view('admin.tasks.ex');
+});
+
+
