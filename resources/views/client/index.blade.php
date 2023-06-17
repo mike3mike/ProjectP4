@@ -30,6 +30,10 @@
 
                 <td>
                     <a href="{{ route('task.show', $task->id) }}" class="btn btn-info">Bekijk Details</a>
+                    @if($task->status == 'afgerond')
+                    <!-- Als dat zo is, tonen we de downloadknop. -->
+                    <a href="{{ route('task.download', $task->id) }}" class="btn btn-success">Download Speelformulier</a>
+                    @endif
                 </td>
             </tr>
             @endforeach
