@@ -109,7 +109,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <label class="form-label">Adres:</label>
-                                <input type="text" class="form-control"value="{{ $task->client->address->->street_name }} {{ $task->client->address->house_number }}, {{ $task->client->address->postal_code }}, {{ $task->client->address->city }}">
+                                <input type="text" class="form-control"value="{{ $task->client->address->street_name }} {{ $task->client->address->house_number }}, {{ $task->client->address->postal_code }}, {{ $task->client->address->city }}">
                             </div>
                             <div class="col-sm-4">
                                 <label class="form-label">E-mailadres factuur:</label>
@@ -128,19 +128,21 @@
                             </div>
                             <div class="col-sm-3">
                                 <label class="form-label">Eindtijd</label>
-                                <input type="text" class="form-control"value="{{ $task->end_time}">
+                                <input type="text" class="form-control"value="{{ $task->end_time}}">
                             </div>
                             <div class="col-sm-4">
-                                <label class="form-label">Aantal uren:</label>
-                                <?php
-                                    $beginTime = explode(':', $task->begin_time);
-                                    $endTime = explode(':', $task->end_time);
-                                    $beginTimeInHours = $beginTime[0] + $beginTime[1] / 60;
-                                    $endTimeInHours = $endTime[0] + $endTime[1] / 60;
-                                    $hours = $endTimeInHours - $beginTimeInHours;
-                                 ?>
-                                <input type="text" class="form-control"  value="{{ $hours }}">
-                            </div>
+                              <label class="form-label">Aantal uren:</label>
+                              <?php
+                                  $beginTime = explode(':', $task->begin_time);
+                                  $endTime = explode(':', $task->end_time);
+                                  $beginTimeInMinutes = $beginTime[0]*60 + $beginTime[1];
+                                  $endTimeInMinutes = $endTime[0]*60 + $endTime[1];
+                                  $differenceInMinutes = $endTimeInMinutes - $beginTimeInMinutes;
+                                  $hours = floor($differenceInMinutes / 60);
+                                  $minutes = $differenceInMinutes % 60;
+                              ?>
+                              <input type="text" class="form-control" value="{{ $hours }}.{{ sprintf('%02d', $minutes) }}">
+                          </div>
                         </div>
                     </div>
                 </div>
