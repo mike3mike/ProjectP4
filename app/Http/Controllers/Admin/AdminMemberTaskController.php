@@ -30,20 +30,43 @@ class AdminMemberTaskController extends Controller
     }
 
     public function approve(UserTask $userTask)
-    {
-        if ($userTask->status === 'geaccepteerd' || $userTask->status === 'misschien') {
-            $userTask->update([
-                'admit' => true,
-            ]);
+{
+    $task = $userTask->task;
+    $taskAdmits = $task->userTasks->where('admit', true)->where('status', 'geaccepteerd')->count();
 
-            // Stuur notificatie naar de gebruiker
-            $userTask->user->notify(new TaskStatusUpdated('Jouw deelname is goedgekeurd'));
-
-            return back()->with('success', 'De deelname van de gebruiker is goedgekeurd');
-        } else {
-            return back()->with('error', 'De deelname van de gebruiker kan niet worden goedgekeurd');
-        }
+    if($taskAdmits >= $task->max_users) {
+        return back()->with('error', 'Maximum aantal gebruikers voor deze taak is al bereikt');
     }
+
+    if ($userTask->status === 'geaccepteerd' || $userTask->status === 'misschien') {
+        $userTask->update([
+            'admit' => true,
+        ]);
+
+        // Stuur notificatie naar de gebruiker
+        $userTask->user->notify(new TaskStatusUpdated('Jouw deelname is goedgekeurd'));
+
+        return back()->with('success', 'De deelname van de gebruiker is goedgekeurd');
+    } else {
+        return back()->with('error', 'De deelname van de gebruiker kan niet worden goedgekeurd');
+    }
+}
+
+    // public function approve(UserTask $userTask)
+    // {
+    //     if ($userTask->status === 'geaccepteerd' || $userTask->status === 'misschien') {
+    //         $userTask->update([
+    //             'admit' => true,
+    //         ]);
+
+    //         // Stuur notificatie naar de gebruiker
+    //         $userTask->user->notify(new TaskStatusUpdated('Jouw deelname is goedgekeurd'));
+
+    //         return back()->with('success', 'De deelname van de gebruiker is goedgekeurd');
+    //     } else {
+    //         return back()->with('error', 'De deelname van de gebruiker kan niet worden goedgekeurd');
+    //     }
+    // }
 
     public function remove(UserTask $userTask)
     {
@@ -62,4 +85,13 @@ class AdminMemberTaskController extends Controller
     {
          return view('admin.tasks.details', ['userTask' => $userTask]);
     }
+    public function showTask(Task $task)
+    {      
+        $task->load('userTasks.user');
+        
+        $taskAdmits = $task->userTasks->where('admit', true)->where('status', 'geaccepteerd')->count();
+    
+        return view('admin.tasks.ex', compact('task', 'taskAdmits'));
+    }
+    
 }
