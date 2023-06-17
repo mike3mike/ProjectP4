@@ -41,7 +41,7 @@ class PlayformController extends Controller
         // Hier kunt u andere data toevoegen die u in uw view wilt gebruiken.
     ];
 
-    PDF::setOptions(['dpi' => 72, 'defaultFont' => 'sans-serif']);
+    // PDF::setOptions(['dpi' => 72, 'defaultFont' => 'sans-serif']);
 
     // We laden de view en geven de data door.
     $pdf = PDF::loadView('playformview', $data);
