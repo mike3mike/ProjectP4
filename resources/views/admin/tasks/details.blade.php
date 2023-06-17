@@ -2,12 +2,34 @@
 
 @section('content')
 <div class="container">
-    <h1>Details</h1>
-    <p>Gebruiker Naam: {{ $userTask->user->name }}</p>
-    <p>Gebruiker Email: {{ $userTask->user->email }}</p>
-    <p>Taak Naam: {{ $userTask->task->task_name }}</p>
-    <p>Datum: {{ $userTask->task->date }}</p>
-    <p>Status: {{ $userTask->status }}</p>
-    <p>Admit: {{ $userTask->admit ? 'Goedgekeurd' : 'Niet Goedgekeurd' }}</p>
+    <div class="card">
+        <div class="card-header">
+            <h2>Details</h2>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Gebruiker Naam</dt>
+                <dd class="col-sm-9">{{ $userTask->user->name }}</dd>
+
+                <dt class="col-sm-3">Gebruiker Email</dt>
+                <dd class="col-sm-9">{{ $userTask->user->email }}</dd>
+
+                <dt class="col-sm-3">Gebruiker rol</dt>
+                <dd class="col-sm-9">{{ $userTask->user->roles->pluck('name')->join(', ') }}</dd>
+
+                <dt class="col-sm-3">Taak Naam</dt>
+                <dd class="col-sm-9">{{ $userTask->task->task_name }}</dd>
+
+                <dt class="col-sm-3">Datum</dt>
+                <dd class="col-sm-9">{{ $userTask->task->date }}</dd>
+
+                <dt class="col-sm-3">Status</dt>
+                <dd class="col-sm-9">{{ $userTask->status }}</dd>
+
+                <dt class="col-sm-3">Toelaten</dt>
+                <dd class="col-sm-9">{{ $userTask->admit ? 'Goedgekeurd' : 'Nog Niet Goedgekeurd' }}</dd>
+            </dl>
+        </div>
+    </div>
 </div>
 @endsection
