@@ -24,6 +24,7 @@
                 </thead>
                 <tbody>
                     @forelse ($$role as $user)
+                    @if ($user->isRoleApprovalFirstTime()) <!-- alleen gebruikers die voor het eerst een rol aanvragen -->
                         <tr>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
@@ -43,6 +44,7 @@
                                 </div>
                             </td>
                         </tr>
+                        @endif
                     @empty
                         <tr>
                             <td colspan="3">Er zijn momenteel geen aanvragen.</td>
