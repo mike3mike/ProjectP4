@@ -36,6 +36,7 @@
                         <td>{{ $userTask->admit ? 'Goedgekeurd' : 'Nog Niet Goedgekeurd' }}</td>
                         <td>{{ $taskAdmits}}/{{ $task->max_users }}</td>
                         <td>
+                            @if($task->status !== 'afgerond')
                             <form action="{{ route('admin.tasks.approve', $userTask) }}" method="post">
                                 @csrf
                                 <button type="submit" class="btn btn-success">Goedkeuren</button>
@@ -44,6 +45,9 @@
                                 @csrf
                                 <button type="submit" class="btn btn-secondary" onclick="confirmDeletion(event, this.parentElement);">Verwijderen</button>
                             </form>
+                            @else
+                    <p>De opdracht is al afgerond</p>
+                @endif
                             <form action="{{ route('admin.tasks.details', $userTask) }}" method="get" class="mt-2">
                                 <button type="submit" class="btn btn-info">Details</button>
                             </form>
