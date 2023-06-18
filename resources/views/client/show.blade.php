@@ -12,7 +12,7 @@
                 <strong>Datum:</strong> {{ $task->date }}<br>
                 <strong>Kader Instructeur:</strong> {{ $task->instructor_name }}<br>
                 <strong>Speellocatie Naam:</strong> {{ $task->play_address_name }}<br>
-                <strong>Speellocatie:</strong>  {{ $task->playAddress->city }}, {{ $task->playAddress->street_name }}, {{ $task->playAddress->house_number }}, {{ $task->playAddress->postal_code }}<br>
+                <strong>Speellocatie:</strong> {{ $task->playAddress->city }}, {{ $task->playAddress->street_name }}, {{ $task->playAddress->house_number }}, {{ $task->playAddress->postal_code }}<br>
                 <strong>Begintijd:</strong> {{ $task->begin_time }}<br>
                 <strong>Eindtijd:</strong> {{ $task->end_time }}<br>
                 <strong>Beschrijving:</strong> {{ $task->description }}<br>
@@ -27,4 +27,3 @@
     <a href="{{ route('task.index') }}" class="btn btn-primary mt-3">Terug naar Opdrachten</a>
 </div>
 @endsection
-

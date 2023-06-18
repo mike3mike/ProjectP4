@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.memberLayout')
 
 @section('content')
 <div class="container">
@@ -6,7 +6,7 @@
     <div class="alert alert-info">
         {{ session('info') }}
     </div>
-@endif
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -23,9 +23,9 @@
                                 <input id="company_name" type="text" placeholder="Voer uw bedrijf naam in" class="form-control @error('company_name') is-invalid @enderror" name="company_name" value="{{ old('company_name') }}" required autocomplete="company_name" autofocus>
 
                                 @error('company_name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -34,12 +34,12 @@
                             <label for="contact_person" class="col-md-4 col-form-label text-md-right">{{ __('Contact Person') }}</label>
 
                             <div class="col-md-6">
-                                <input id="contact_person"  placeholder="Voer de naam van de contactpersoon in" type="text" class="form-control @error('contact_person') is-invalid @enderror" name="contact_person" value="{{ old('contact_person') }}">
+                                <input id="contact_person" placeholder="Voer de naam van de contactpersoon in" type="text" class="form-control @error('contact_person') is-invalid @enderror" name="contact_person" value="{{ old('contact_person') }}">
 
                                 @error('contact_person')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -51,9 +51,9 @@
                                 <input id="contact_person_phone" type="text" placeholder="Voer het telefoonnummer van de contactpersoon in" class="form-control @error('contact_person_phone') is-invalid @enderror" name="contact_person_phone" value="{{ old('contact_person_phone') }}">
 
                                 @error('contact_person_phone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -64,9 +64,9 @@
                                 <input id="billing_email" type="text" placeholder="Voer uw facturatie e-mailadres in" class="form-control @error('billing_email') is-invalid @enderror" name="billing_email" value="{{ old('billing_email') }}">
 
                                 @error('billing_email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -77,9 +77,9 @@
                                 <input id="city" type="text" placeholder="Voer uw stad in" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}">
 
                                 @error('city')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -90,9 +90,9 @@
                                 <input id="street" type="text" placeholder="Voer uw straatnaam in" class="form-control @error('street') is-invalid @enderror" name="street" value="{{ old('street') }}">
 
                                 @error('street')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -104,9 +104,9 @@
                                 <input id="postal_code" type="text" placeholder="Voer uw postcode in" class="form-control @error('postal_code') is-invalid @enderror" name="postal_code" value="{{ old('postal_code') }}">
 
                                 @error('postal_code')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message .' nnnn<spatie>MM'}}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message .' nnnn<spatie>MM'}}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -118,9 +118,9 @@
                                 <input id="house_number" type="text" placeholder="Voer uw huisnummer in" class="form-control @error('house_number') is-invalid @enderror" name="house_number" value="{{ old('house_number') }}">
 
                                 @error('house_number')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
