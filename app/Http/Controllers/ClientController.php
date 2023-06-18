@@ -45,7 +45,6 @@ class ClientController extends Controller
 {
     $validator = Validator::make($request->all(), [
         'opdrachtnaam' => 'required|string',
-        'opdrachtnummer' => 'required|numeric|max_digits:11',
         'datum' => ['required', 'date', 'after_or_equal:' . Carbon::today()->format('Y-m-d')],
         'kader_instructeur' => 'required',
         'speellocatie_naam' => 'required|string',
@@ -120,7 +119,6 @@ private function createTask($data, $playLocationId, $makeupLocationId)
 
     $task = new Task;
     $task->task_name = $data['opdrachtnaam'];
-    $task->task_number = $data['opdrachtnummer'];
     $task->date = $data['datum'];
     $task->instructor_name = $data['kader_instructeur'];
     $task->play_address_name = $data['speellocatie_naam'];

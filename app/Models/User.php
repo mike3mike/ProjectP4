@@ -67,16 +67,7 @@ class User extends Authenticatable
 {
     return $this->hasMany(UserTask::class);
 }
-// public function getApprovalAttributeForRole($roleName)
-// {
-//     $attribute = self::$role_approval_mapping[strtolower($roleName)] ?? null;
 
-//     if ($attribute) {
-//         return $this->{$attribute};
-//     }
-
-//     throw new InvalidArgumentException("Unknown role: $roleName");
-// }
 public function getApprovalAttributeForRole($roleName)
 {
     $attribute = self::$role_approval_mapping[strtolower($roleName)] ?? null;
@@ -86,6 +77,24 @@ public function getApprovalAttributeForRole($roleName)
     }
 
     throw new InvalidArgumentException("Unknown role: $roleName");
+}
+public function isRoleApprovalFirstTime()
+{
+    foreach (self::$role_approval_mapping as $role => $column) {
+        if ($this->$column) {
+            return false;
+        }
+    }
+    return true;
+}
+public function hasApprovedRole()
+{
+    foreach (self::$role_approval_mapping as $role => $column) {
+        if ($this->$column) {
+            return true;
+        }
+    }
+    return false;
 }
 
 

@@ -2,34 +2,33 @@
 
 @section('content')
     <div class="container">
-        <h1>Invite Members to Task {{ $task->id }}</h1>
+        <h1>Leden uitnodigen voor taak nummer: {{ $task->id }}</h1>
 
         <form action="{{ route('admin.sendInvitation', $task) }}" method="post" id="userForm">
             @csrf
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="selectAll">
                 <label class="form-check-label" for="selectAll">
-                    Select All
+                    Alles selecteren
                 </label>
             </div>
             @foreach ($users as $user)
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $user->name }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ $user->email }}</h6>
-                        <p class="card-text">Phone Number: {{ $user->phone_number }}</p>
-                        <p class="card-text">Admitted: {{ $user->userTasks()->where('admit', true)->count() }} times</p>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="users[]" value="{{ $user->id }}" id="defaultCheck1">
-                            <label class="form-check-label" for="defaultCheck1">
-                                Select User
-                            </label>
-                        </div>
+            <div class="card mb-3" style="width: 24rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $user->name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted" style="font-size: 0.8rem;">{{ $user->email }}</h6>
+                    <p class="card-text">Telefoonnummer: {{ $user->phone_number }}</p>
+                    <p class="card-text">Aantal deelnemen : {{ $user->userTasks()->where('admit', true)->count() }} keer</p>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" name="users[]" value="{{ $user->id }}" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">
+                            selecteer lid
+                        </label>
                     </div>
                 </div>
+            </div>
             @endforeach
-
-            <button type="submit" class="btn btn-primary mt-3">Send Invitations</button>
+            <button type="submit" class="btn btn-primary mt-3">Uitnodigingen versturen</button>
         </form>
     </div>
 @endsection

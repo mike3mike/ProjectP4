@@ -49,7 +49,9 @@
                                     <button type="submit" class="btn btn-primary">Opdracht Afronden</button>
                                 </form>
                             @elseif ($task->status === 'afgerond')
-                                <p class="text-success">Afgerond</p>
+                                {{-- <p class="text-success">Afgerond</p> --}}
+                                <a href="{{ route('task.download', $task->id) }}" class="btn btn-success">Download Speelformulier</a>
+
                             @else
                                 <p class="text-danger">Fout</p>
                             @endif

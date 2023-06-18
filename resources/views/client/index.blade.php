@@ -16,6 +16,7 @@
             <tr>
                 <th>Opdrachtnaam</th>
                 <th>Opdrachtnummer</th>
+                <th>Datum</th>
                 <th>Status</th>
                 <th>Acties</th>
 
@@ -25,11 +26,16 @@
             @foreach($tasks as $task)
             <tr>
                 <td>{{ $task->task_name }}</td>
-                <td>{{ $task->task_number }}</td>
+                <td>{{ $task->id }}</td>
+                <td>{{ $task->date }}</td>
                 <td>{{ $task->status }}</td>
 
                 <td>
                     <a href="{{ route('task.show', $task->id) }}" class="btn btn-info">Bekijk Details</a>
+                    @if($task->status == 'afgerond')
+                    <!-- Als dat zo is, tonen we de downloadknop. -->
+                    <a href="{{ route('task.download', $task->id) }}" class="btn btn-success">Download Speelformulier</a>
+                    @endif
                 </td>
             </tr>
             @endforeach

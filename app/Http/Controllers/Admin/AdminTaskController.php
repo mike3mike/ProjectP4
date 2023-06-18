@@ -81,6 +81,7 @@ public function showAdmin($id)
 }
 public function finishTask(Task $task)
 {
+    // dd('status ',$task->status);
     // Update de status naar 'afgerond'
     $task->status = 'afgerond';
     $task->save();
