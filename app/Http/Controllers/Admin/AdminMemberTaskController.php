@@ -70,16 +70,15 @@ class AdminMemberTaskController extends Controller
 
     public function remove(UserTask $userTask)
     {
-        if ($userTask->status === 'geweigerd') {
+       
             // Stuur notificatie naar de gebruiker voor het verwijderen
             $userTask->user->notify(new TaskStatusUpdated('Jouw deelname is afgewezen'));
 
             $userTask->delete();
 
             return back()->with('success', 'De deelname van de gebruiker is afgewezen');
-        } else {
-            return back()->with('error', 'De deelname van de gebruiker kan niet worden afgewezen');
-        }
+       
+        
     }
     public function details(UserTask $userTask)
     {
