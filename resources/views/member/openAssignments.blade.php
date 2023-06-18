@@ -18,31 +18,46 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>taskId</th>
+                <th>Opdrachtnummer</th>
                 <th>status</th>
-                <th>admit</th>
+                <th>Toelaten</th>
                 <th>Acties</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($userTasks as $userTask)
             <tr>
-                <td>{{ $userTask->id }}</td>
-                <td>{{ $userTask->status }}</td>
-                <td>{{ $userTask->admit }}</td>
+                <td>{{ $userTask->task_id }}</td>
+                <td> @if($userTask->status === null)
+                    Nog niet beslist
+                @elseif($userTask->status !== null)
+                {{$userTask->status}}
+                @endif</td>
+                
                 <td>
+                    @if($userTask->admit === null)
+                        Nog niet bekend
+                    @elseif($userTask->admit == 0)
+                    Niet Goedgekeurd
+                    @elseif($userTask->admit == 1)
+                        Goedgekeurd
+                    @endif
+                </td>
+                <td>
+                    @if($userTask->admit !== 1)
                     <form action="{{ route('member.openAssignments.accept', $userTask) }}" method="post">
                         @csrf
                         <button type="submit" class="btn btn-success">Accepteren</button>
                     </form>
                     <form action="{{ route('member.openAssignments.maybe', $userTask) }}" method="post" class="mt-2">
                         @csrf
-                        <button type="submit" class="btn btn-warning">Ik weet het nog niet</button>
+                        <button type="submit" class="btn btn-warning">Misschien</button>
                     </form>
                     <form action="{{ route('member.openAssignments.decline', $userTask) }}" method="post" class="mt-2">
                         @csrf
                         <button type="submit" class="btn btn-danger">Weigeren</button>
                     </form>
+                    @endif
                 </td>
             </tr>
             @endforeach
