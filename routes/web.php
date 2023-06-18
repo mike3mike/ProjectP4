@@ -67,5 +67,5 @@ Route::middleware(['auth', 'role:opdrachtgever'])->group(function () {
     Route::post('/client/task', [ClientController::class, 'store'])->name('task.store');
     Route::get('/client/task', [ClientController::class, 'index'])->name('task.index');
     Route::get('/client/task/create', [ClientController::class, 'create'])->name('task.create');
-    Route::get('/client//task/{id}', [ClientController::class, 'show'])->name('task.show');
+    Route::get('/client/task/{id}', [ClientController::class, 'show'])->name('task.show');
 });
