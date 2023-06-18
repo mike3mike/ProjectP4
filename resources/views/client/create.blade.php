@@ -20,10 +20,6 @@
             <input type="text" id="opdrachtnaam" name="opdrachtnaam" class="form-control" required>
         </div>
         <div class="form-group">
-            <label for="opdrachtnummer">Opdrachtnummer:</label>
-            <input type="text" id="opdrachtnummer" name="opdrachtnummer" class="form-control" required>
-        </div>
-        <div class="form-group">
             <label for="description">Beschrijving:</label>
             <input type="text" id="description" name="description" class="form-control" required>
         </div>
