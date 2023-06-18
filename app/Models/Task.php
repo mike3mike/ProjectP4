@@ -9,7 +9,7 @@ class Task extends Model
 {
     use HasFactory;
     protected $table = 'task';
-    protected $fillable = ['task_name', 'begin_time', 'end_time', 'date', 'description', 'instructor_name', 'task_number', 'max_users','play_address_id', 'play_address_name','makeup_address_id', 'status', 'task_type', 'client_id'];
+    protected $fillable = ['task_name', 'begin_time', 'end_time', 'date', 'description', 'instructor_name', 'max_users','play_address_id', 'play_address_name','makeup_address_id', 'status', 'task_type', 'client_id'];
 
     public function client() {
         return $this->belongsTo(Client::class, 'client_id', 'user_id');
