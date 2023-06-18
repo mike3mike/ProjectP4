@@ -28,7 +28,11 @@
                 {{-- {{ dump($userTask) }} --}}
                     <tr>
                         <td>{{ $userTask->user->name }} - {{ $userTask->user->email }}</td>
-                        <td>{{ $userTask->status }}</td>
+                        <td> @if($userTask->status === null)
+                            Nog niet beslist
+                        @elseif($userTask->status !== null)
+                        {{$userTask->status}}
+                        @endif</td>
                         <td>{{ $userTask->admit ? 'Goedgekeurd' : 'Nog Niet Goedgekeurd' }}</td>
                         <td>{{ $taskAdmits}}/{{ $task->max_users }}</td>
                         <td>
