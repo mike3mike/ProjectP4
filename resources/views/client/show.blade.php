@@ -6,9 +6,9 @@
 
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">{{ $task->task_name }}</h5>
             <p class="card-text">
-                <strong>Opdrachtnummer:</strong> {{ $task->task_number }}<br>
+                <strong>Opdrachtnaam:</strong> {{ $task->task_name }}<br>
+                <strong>Opdrachtnummer:</strong> {{ $task->id }}<br>
                 <strong>Datum:</strong> {{ $task->date }}<br>
                 <strong>Kader Instructeur:</strong> {{ $task->instructor_name }}<br>
                 <strong>Speellocatie Naam:</strong> {{ $task->play_address_name }}<br>
