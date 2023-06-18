@@ -16,6 +16,7 @@
             <tr>
                 <th>Opdrachtnaam</th>
                 <th>Opdrachtnummer</th>
+                <th>Datum</th>
                 <th>Status</th>
                 <th>Acties</th>
     
@@ -25,7 +26,8 @@
             @foreach($tasks as $task)
                 <tr>
                     <td>{{ $task->task_name }}</td>
-                    <td>{{ $task->task_number }}</td>
+                    <td>{{ $task->task_id }}</td>
+                    <td>{{ $task->date}}</td>
                     <td>{{ $task->status }}</td>
                  
                     <td>
