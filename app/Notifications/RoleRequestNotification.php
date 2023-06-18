@@ -46,7 +46,7 @@ class RoleRequestNotification extends Notification
         return (new MailMessage)
             ->subject('Nieuwe rol aanvraag')
             ->line($this->user->name . ' heeft een nieuwe rol aangevraagd: ' . $this->role->name)
-            ->action('Bekijk de aanvraag', url('home'))
+            ->action('Bekijk de aanvraag', url('/admin/role-requests'))
             ->line('Bedankt voor het gebruiken van onze applicatie!');
     }
 }

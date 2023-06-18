@@ -36,9 +36,7 @@ class UserApproved extends Notification
     {
         return (new MailMessage)
                     ->line('Je aanvraag is goedgekeurd.')
-                    ->action('Bekijk je account', route('home'))
-
-                    // ->action('Bekijk je account', url('/'))
+                    ->action('Bekijk je account', url(''))
                     ->line('Bedankt voor het gebruiken van onze applicatie!');
     }
 

@@ -33,7 +33,7 @@ class TaskAccepted extends Notification
     {
         return (new MailMessage)
                     ->line('De opdracht '.$this->task->name.' is '.$this->status.' door '.$this->user->name.'.')
-                    ->action('Bekijk de opdracht', url('/'))
+                    ->action('Bekijk de opdracht', url("/admin/tasks/{$this->task->id}/showTask"))
                     ->line('Bedankt voor het gebruiken van onze applicatie!');
     }
 }

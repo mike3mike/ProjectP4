@@ -45,7 +45,7 @@ class TaskStatusUpdated extends Notification
         return (new MailMessage)
                     ->line('De status van je taak is bijgewerkt.')
                     ->line('De nieuwe status is: ' . $this->status)
-                    ->action('Bekijk je taken', url('/login'))
+                    ->action('Bekijk je taken', url('/member/open-assignments'))
                     ->line('Dank je wel voor het gebruiken van onze applicatie!');
     }
 }

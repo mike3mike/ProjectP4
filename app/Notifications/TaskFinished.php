@@ -36,7 +36,8 @@ class TaskFinished extends Notification
     {
         return (new MailMessage)
             ->subject('Opdracht afgerond!')
-            ->line('De opdracht ' . $this->task->task_name . ' is succesvol afgerond.');
+            ->line('De opdracht ' . $this->task->task_name . ' is succesvol afgerond.')
+            ->action('Bekijk de opdracht', url('/client/task'));
     }
     
 

@@ -27,7 +27,7 @@ class AssignmentApproved extends Notification
     {
         return (new MailMessage)
                     ->line('Uw opdracht '.$this->task->name.' is goedgekeurd.')
-                    ->action('Bekijk de opdracht', url('/'))
+                    ->action('Bekijk de opdracht', url('/client/task'))
                     ->line('Bedankt voor het gebruiken van onze applicatie!');
     }
 }

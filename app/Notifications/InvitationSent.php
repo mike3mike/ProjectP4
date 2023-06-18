@@ -48,9 +48,10 @@ class InvitationSent extends Notification
             ->line('U bent uitgenodigd voor een nieuwe taak.')
             ->line('Taak details:')
             ->line('Taaknaam: ' . $this->task->task_name)
+            ->line('Datum: ' . $this->task->date)
             ->line('Begintijd: ' . $this->task->begin_time)
             ->line('Eindtijd: ' . $this->task->end_time)
-            ->action('Bekijk taak', url('home'))
+            ->action('Bekijk taak', url('/member/open-assignments'))
             ->line('Bedankt voor het gebruiken van onze applicatie!');
     }
 

@@ -39,7 +39,7 @@ class TaskCreated extends Notification
     {
         return (new MailMessage)
                     ->line('Er is een nieuwe taak aangemaakt.')
-                    ->action('Bekijk de taak', route('login'))
+                    ->action('Bekijk de taak', route('/admin/new-assignments'))
                     ->line('Bedankt voor het gebruiken van onze applicatie!');
     }
 
