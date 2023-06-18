@@ -161,7 +161,7 @@
         </div>
         <div class="form-group">
             <label for="opdrachtnummer">Opdrachtnummer:</label>
-            <input type="text" id="opdrachtnummer" value="{{ $task->task_number}}">
+            <input type="text" id="opdrachtnummer" value="{{ $task->id}}">
         </div>
         <div class="form-group">
             <label for="kader">Kader:</label>
