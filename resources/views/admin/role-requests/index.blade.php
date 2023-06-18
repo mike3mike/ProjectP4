@@ -10,6 +10,7 @@
     @endif
         <div class="list-group">
             @foreach ($users as $user)
+            @if ($user->hasApprovedRole()) <!-- alleen gebruikers die al een rol hebben -->
                 <div class="list-group-item">
                     <h5 class="mb-1">{{ $user->name }}</h5>
                     <p>Heeft een aanvraag ingediend om de volgende rollen te worden:</p>
@@ -33,6 +34,7 @@
                         @endif
                     @endforeach
                 </div>
+                @endif
             @endforeach
         </div>
     </div>
