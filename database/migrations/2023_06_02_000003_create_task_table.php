@@ -15,7 +15,6 @@ class CreateTaskTable extends Migration
             $table->date('date');
             $table->string('description');
             $table->string('instructor_name');
-            $table->integer('task_number');
             $table->integer('max_users');
             $table->string('play_address_name');
             $table->foreignId('play_address_id')->constrained('address');
