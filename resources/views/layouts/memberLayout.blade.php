@@ -17,6 +17,16 @@
 
 
     </ul>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="/member/open-assignments" class="nav-link">
+                <p>uitnodigingen</p>
+            </a>
+        </li>
+
+
+
+    </ul>
 </li>
 
 @endsection
