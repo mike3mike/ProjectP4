@@ -9,8 +9,14 @@
                 {{ session('status') }}
             </div>
         @endif
-
-        <table class="table table-bordered table-striped">
+        <div class="input-group mb-3">
+            <input id="taskSearch" type="text" class="form-control" placeholder="Zoeken naar opdrachten">
+            <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+            </div>
+        </div>
+        
+        <table id="taskTable" class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Opdracht Naam</th>
@@ -64,6 +70,28 @@
             </tbody>
         </table>
   </div>  
+  @section('scripts')
+  <script>
+    window.onload = function() {
+        document.getElementById('taskSearch').addEventListener('keyup', function() {
+            let searchValue = this.value.toLowerCase();
+            let tableRows = document.getElementById('taskTable').getElementsByTagName('tbody')[0].rows;
+        
+            for (let i = 0; i < tableRows.length; i++) {
+                let columns = tableRows[i].getElementsByTagName('td');
+                let rowText = '';
+    
+                for (let j = 0; j < columns.length; j++) {
+                    rowText += columns[j].textContent.toLowerCase() + ' ';
+                }
+    
+                tableRows[i].style.display = rowText.includes(searchValue) ? '' : 'none';
+            }
+        });
+    };
+    </script>
+    
+    @endsection
 @endsection
 
 {{-- @extends('layouts.app')
