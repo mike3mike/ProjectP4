@@ -55,6 +55,7 @@ Route::middleware(['auth', 'role:coordinator'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:lid,coordinator'])->group(function () {
+    Route::get('/member/accepted-assignments', [UserController::class, 'acceptedAssignments'])->name('member.acceptedAssignments.index');
     Route::get('/member/open-assignments', [UserController::class, 'index'])->name('member.openAssignments.index');
     Route::post('/member/open-assignments/accept/{userTask}', [UserController::class, 'accept'])->name('member.openAssignments.accept');
     Route::post('/member/open-assignments/maybe/{userTask}', [UserController::class, 'maybe'])->name('member.openAssignments.maybe');
@@ -68,7 +69,7 @@ Route::middleware(['auth', 'role:opdrachtgever'])->group(function () {
     Route::get('/client/task', [ClientController::class, 'index'])->name('task.index');
     Route::get('/client/task/create', [ClientController::class, 'create'])->name('task.create');
     Route::get('/client/task/{id}', [ClientController::class, 'show'])->name('task.show');
-    Route::get('/client/task/{id}/download',[PlayformController::class, 'downloadPlayform'])->name('task.download');
+    Route::get('/client/task/{id}/download', [PlayformController::class, 'downloadPlayform'])->name('task.download');
 });
 
 // Route::get('downloadPDF', function(){
@@ -81,5 +82,3 @@ Route::middleware(['auth', 'role:opdrachtgever'])->group(function () {
 // Route::get('/test', function(){
 //     return view('pla');
 // });
-
-
