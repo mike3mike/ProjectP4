@@ -59,9 +59,6 @@ Route::middleware(['auth', 'role:coordinator'])->group(function () {
 });
 Route::get('/', [HomeController::class, 'index']);
 Route::middleware(['auth', 'role: lid, coordinator'])->group(function () {
-
-
-
     Route::get('/member/accepted-assignments', [UserController::class, 'acceptedAssignments'])->name('member.acceptedAssignments.index');
     Route::get('/member/open-assignments', [UserController::class, 'index'])->name('member.openAssignments.index');
     Route::post('/member/open-assignments/accept/{userTask}', [UserController::class, 'accept'])->name('member.openAssignments.accept');
@@ -70,7 +67,8 @@ Route::middleware(['auth', 'role: lid, coordinator'])->group(function () {
     Route::post('/member/open-assignments/decline/{userTask}', [UserController::class, 'decline'])->name('member.openAssignments.decline');
     Route::post('/member/become_client', [UserController::class, 'submitBecomeClient'])->name('task.submit_become_client');
     Route::get('/member/become_client', [UserController::class, 'memberBecomeClient'])->name('member.become_client');
-    Route::get('/member/check_client_status', [UserController::class, 'checkClientStatus'])->name('member.check_client_status');
+    Route::get('/member/check_client_status', [UserController::class, 'checkClientStatus'])->name('member.check_client_status');  
+    Route::get('/member/{id}/showMemberTask', [UserController::class, 'showMemberTask'])->name('task.showMember');
 });
 Route::middleware(['auth', 'role:opdrachtgever'])->group(function () {
 

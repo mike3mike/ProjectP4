@@ -22,6 +22,7 @@
                 <th>status</th>
                 <th>Toelaten</th>
                 <th>Acties</th>
+                <th>Details</th>
             </tr>
         </thead>
         <tbody>
@@ -60,6 +61,9 @@
                         <button type="submit" class="btn btn-danger">Weigeren</button>
                     </form>
                     @endif
+                </td>
+                <td>
+                    <a href="{{ route('task.showMember', $userTask->task_id) }}" class="btn btn-info">Details</a>
                 </td>
             </tr>
             @endif

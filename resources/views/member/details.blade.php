@@ -23,7 +23,5 @@
             </p>
         </div>
     </div>
-
-    <a href="{{ route('task.index') }}" class="btn btn-primary mt-3">Terug naar Opdrachten</a>
 </div>
 @endsection

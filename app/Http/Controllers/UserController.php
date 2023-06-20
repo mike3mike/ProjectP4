@@ -165,4 +165,13 @@ class UserController extends Controller
         // Als de gebruiker niet de rol 'opdrachtgever' heeft, stuur ze dan naar de 'become_client' route
         return redirect()->route('member.become_client');
     }
+    public function showMemberTask($id)
+{
+    // Zoek de taak op basis van het gegeven ID.
+    // Als er geen taak met dit ID is, zal findOrFail een 404 pagina teruggeven.
+    $task = Task::findOrFail($id);
+
+    // Geef de taak door aan de view.
+    return view('member.details', ['task' => $task]);
+}
 }

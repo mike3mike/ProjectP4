@@ -46,6 +46,9 @@
                     Goedgekeurd
                     @endif
                 </td>
+                <td>
+                    <a href="{{ route('task.showMember', $userTask->task_id) }}" class="btn btn-info">Details</a>
+                </td>
 
             </tr>
             @endif
