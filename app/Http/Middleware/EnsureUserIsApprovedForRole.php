@@ -34,33 +34,72 @@ class EnsureUserIsApprovedForRole
 
     //     return $next($request);
     // }
-    public function handle(Request $request, Closure $next, ...$roles)
+//     public function handle(Request $request, Closure $next, ...$roles)
+// {
+//     if (!$request->user()) {
+//         return redirect()->route('login');
+//     }
+
+//     foreach ($roles as $role) {
+//         // print the role
+//         // dd($role);
+
+//         $approvalAttribute = $request->user()->getApprovalAttributeForRole($role);
+
+//         // print the approval attribute
+//         // dd($approvalAttribute);
+
+//         // check if the user has the role and is approved for it
+//         if (!$request->user()->hasRole($role)) {
+//             return redirect()->route('member.openAssignments.index')->with('warning', 'Je moet de rol van ' . $role . ' hebben om deze pagina te bekijken.');
+//         }
+
+//         if (!$request->user()->$approvalAttribute) {
+//             return redirect()->route('member.openAssignments.index')->with('warning', 'Je rol van ' . $role . ' moet worden goedgekeurd voordat je deze pagina kunt bekijken.');
+//         }
+       
+//     }
+
+//     return $next($request);
+// }
+public function handle(Request $request, Closure $next, ...$roles)
 {
     if (!$request->user()) {
         return redirect()->route('login');
     }
 
     foreach ($roles as $role) {
-        // print the role
-        // dd($role);
-
+        // Get the approval attribute
         $approvalAttribute = $request->user()->getApprovalAttributeForRole($role);
 
-        // print the approval attribute
-        // dd($approvalAttribute);
-
-        // check if the user has the role and is approved for it
+        // Check if the user has the role and is approved for it
         if (!$request->user()->hasRole($role)) {
-            return redirect()->route('member.openAssignments.index')->with('warning', 'Je moet de rol van ' . $role . ' hebben om deze pagina te bekijken.');
+            $route = $this->getRedirectRouteForRole($role);
+            return redirect()->route($route)->with('warning', 'Je moet de rol van ' . $role . ' hebben om deze pagina te bekijken.');
         }
 
         if (!$request->user()->$approvalAttribute) {
-            return redirect()->route('member.openAssignments.index')->with('warning', 'Je rol van ' . $role . ' moet worden goedgekeurd voordat je deze pagina kunt bekijken.');
+            $route = $this->getRedirectRouteForRole($role);
+            return redirect()->route($route)->with('warning', 'Je rol van ' . $role . ' moet worden goedgekeurd voordat je deze pagina kunt bekijken.');
         }
-       
     }
 
     return $next($request);
 }
+
+// Function to get the redirect route based on the role
+private function getRedirectRouteForRole($role) {
+    switch($role) {
+        case 'lid':
+            return 'member.openAssignments.index';
+        case 'coordinator':
+            return 'admin.approvals.index';
+        case 'opdrachtgever':
+            return 'task.index';
+        default:
+            return 'login'; // default route in case no role matches
+    }
+}
+
 
 }

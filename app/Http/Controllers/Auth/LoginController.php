@@ -23,8 +23,8 @@ class LoginController extends Controller
     use AuthenticatesUsers;
     protected function authenticated(Request $request, $user)
     {
-        if ($user->hasRole('coordinator')) {
-            // Als de gebruiker een 'coordinator' is, stuur ze dan naar de admin-pagina
+        if ($user->hasRole('coordinator') && $user->is_approved_coordinator) {
+            // Als de gebruiker een 'coordinator' is en geapproveerd, stuur ze dan naar de admin-pagina
             return redirect('/admin/approvals');
         } else if ($user->hasRole('lid') && !$user->is_approved_member) {
             // Als de gebruiker een lid is maar nog niet is goedgekeurd, log ze dan uit en stuur ze naar de 'approval pending'-pagina

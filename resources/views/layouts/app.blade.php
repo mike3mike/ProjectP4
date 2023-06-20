@@ -115,8 +115,8 @@
                   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                       <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                      @if(Auth::user()->hasRole('coordinator') AND Auth::user()->where('is_approved_coordinator', true)->exists() )
-
+                      {{-- @if(Auth::user()->hasRole('coordinator') AND Auth::user()->where('is_approved_coordinator', true)->exists() ) --}}
+                      @if(Auth::user()->hasRole('coordinator') && Auth::user()->is_approved_coordinator)
                       <li class="nav-item menu-open">
                           <a href="" class="nav-link ">
                               <p>
@@ -197,7 +197,8 @@
                       @endif
 
 
-                      @if(Auth::user()->hasRole('lid') AND Auth::user()->where('is_approved_member', true)->exists() )
+                      {{-- @if(Auth::user()->hasRole('lid') AND Auth::user()->where('is_approved_member', true)->exists() ) --}}
+                      @if(Auth::user()->hasRole('lid') && Auth::user()->is_approved_member || (Auth::user()->hasRole('coordinator') && Auth::user()->is_approved_coordinator))
                       <li class="nav-item menu-open">
                           <a class="nav-link ">
                               <p>
@@ -238,7 +239,8 @@
                           </ul>
                       </li>
                       @endif
-                      @if(Auth::user()->hasRole('opdrachtgever') AND Auth::user()->where('is_approved_client', true)->exists() )
+                      {{-- @if(Auth::user()->hasRole('opdrachtgever') AND Auth::user()->where('is_approved_client', true)->exists() ) --}}
+                      @if(Auth::user()->hasRole('opdrachtgever') && Auth::user()->is_approved_client )
                       <li class="nav-item menu-open">
                           <a class="nav-link ">
                               <p>
