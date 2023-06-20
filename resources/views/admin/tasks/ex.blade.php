@@ -32,7 +32,7 @@
             {{-- {{ dump($task->userTasks) }} --}}
                 @foreach ($task->userTasks as $userTask)
                 {{-- {{ dump($userTask) }} --}}
-                @if($userTask->admit ===null)
+                @if($userTask->admit ===null AND $userTask->status === 'geaccepteerd')
                     <tr>
                         <td>{{ $userTask->user->name }} - {{ $userTask->user->email }}</td>
                         <td> @if($userTask->status === null)

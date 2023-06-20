@@ -6,14 +6,11 @@ use App\Http\Controllers\Admin\AdminTaskController;
 use App\Http\Controllers\Admin\RoleRequestController;
 use App\Http\Controllers\Admin\AdminMemberTaskController;
 use App\Http\Controllers\Admin\PlayformController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,9 +32,7 @@ Route::get('/approval-pending', function () {
 });
 
 Route::middleware(['auth', 'role:coordinator'])->group(function () {
-    if (Route::middleware(['auth', 'role:coordinator'])) {
-        Route::get('/', [AdminApprovalController::class, 'index'])->name('admin.approvals.index');
-    };
+    // Route::get('/', [AdminApprovalController::class, 'index'])->name('admin.approvals.index');
     Route::get('/admin/approvals', [AdminApprovalController::class, 'index'])->name('admin.approvals.index');
     Route::post('/admin/approvals/members/{user}', [AdminApprovalController::class, 'approveMember'])->name('admin.approvals.approveMembers');
     Route::post('/admin/approvals/clients/{user}', [AdminApprovalController::class, 'approveClient'])->name('admin.approvals.approveClients');
@@ -60,11 +55,10 @@ Route::middleware(['auth', 'role:coordinator'])->group(function () {
     // test
     Route::get('/admin/tasks/{task}/showTask', [AdminMemberTaskController::class, 'showTask'])->name('admin.tasks.showTask');
 });
+Route::get('/', [HomeController::class, 'index']);
+Route::middleware(['auth', 'role: lid, coordinator'])->group(function () {
 
-Route::middleware(['auth', 'role:lid,coordinator'])->group(function () {
-    if (Route::middleware(['auth', 'role:lid,coordinator'])) {
-        Route::get('/', [UserController::class, 'index'])->name('member.openAssignments.index');
-    };
+
 
     Route::get('/member/accepted-assignments', [UserController::class, 'acceptedAssignments'])->name('member.acceptedAssignments.index');
     Route::get('/member/open-assignments', [UserController::class, 'index'])->name('member.openAssignments.index');
@@ -76,9 +70,9 @@ Route::middleware(['auth', 'role:lid,coordinator'])->group(function () {
     Route::get('/member/check_client_status', [UserController::class, 'checkClientStatus'])->name('member.check_client_status');
 });
 Route::middleware(['auth', 'role:opdrachtgever'])->group(function () {
-    if (Route::middleware(['auth', 'role:opdrachtgever'])) {
-        Route::post('/', [ClientController::class, 'store'])->name('task.store');
-    };
+
+    // Route::post('/', [ClientController::class, 'store'])->name('task.store');
+
 
     Route::post('/client/task', [ClientController::class, 'store'])->name('task.store');
     Route::get('/client/task', [ClientController::class, 'index'])->name('task.index');
