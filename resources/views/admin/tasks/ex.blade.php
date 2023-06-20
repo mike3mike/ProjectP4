@@ -32,6 +32,7 @@
             {{-- {{ dump($task->userTasks) }} --}}
                 @foreach ($task->userTasks as $userTask)
                 {{-- {{ dump($userTask) }} --}}
+                @if($userTask->admit ===null)
                     <tr>
                         <td>{{ $userTask->user->name }} - {{ $userTask->user->email }}</td>
                         <td> @if($userTask->status === null)
@@ -59,6 +60,7 @@
                             </form>
                         </td>
                     </tr>
+                    @endif
             @endforeach
         </tbody>
     </table>
