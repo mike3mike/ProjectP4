@@ -64,7 +64,15 @@ class ClientController extends Controller
         'griemlocatie.house_number' => 'sometimes|required',
         'griemlocatie.postcode' => ['sometimes','required','regex:/^([0-9]{4} ?[A-Z]{2})|([0-9]{4} ?[a-z]{2})$/'],
         'soort_opdracht' => ['required', 'array', Rule::in(['BHV', 'EHBO', 'Examen'])],           
-    ]);
+    ],[
+        'eindtijd.after' => 'The end time must be after the start time.',
+        'speellocatie.postcode.regex' => 'De postcode moet bestaan uit vier cijfers, een optionele spatie en twee hoofdletters.',
+        'griemlocatie.postcode.regex' => 'De postcode moet bestaan uit vier cijfers, een optionele spatie en twee hoofdletters.',
+])->after(function ($validator) use ($request) {
+        if ($request->input('begintijd') >= $request->input('eindtijd')) {
+            $validator->errors()->add('eindtijd', 'De eindtijd moet na de starttijd zijn.');
+        }
+    });
 
     if ($validator->fails()) {
         return redirect()->back()->withErrors($validator)->withInput($request->all());

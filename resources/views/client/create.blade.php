@@ -17,57 +17,57 @@
         @csrf
         <div class="form-group">
             <label for="opdrachtnaam">Opdrachtnaam:</label>
-            <input type="text" id="opdrachtnaam" name="opdrachtnaam" class="form-control" required>
+            <input type="text" id="opdrachtnaam" name="opdrachtnaam" class="form-control" value="{{ old('opdrachtnaam') }}" required>
         </div>
         <div class="form-group">
             <label for="description">Beschrijving:</label>
-            <input type="text" id="description" name="description" class="form-control" required>
+            <input type="text" id="description" name="description" class="form-control" value="{{ old('description') }}" required>
         </div>
         <div class="form-group">
             <label for="datum">Datum:</label>
-            <input type="date" id="datum" name="datum" class="form-control" required>
+            <input type="date" id="datum" name="datum" class="form-control" value="{{ old('datum') }}" required>
         </div>
 
         <div class="form-group">
             <label for="begintijd">Begintijd:</label>
-            <input type="time" id="begintijd" name="begintijd" class="form-control" required>
+            <input type="time" id="begintijd" name="begintijd" class="form-control" value="{{ old('begintijd') }}" required>
         </div>
 
         <div class="form-group">
             <label for="eindtijd">Eindtijd:</label>
-            <input type="time" id="eindtijd" name="eindtijd" class="form-control" required>
+            <input type="time" id="eindtijd" name="eindtijd" class="form-control" value="{{ old('eindtijd') }}" required>
         </div>
 
         <div class="form-group">
             <label for="kader_instructeur">Kader instructeur:</label>
-            <input type="text" id="kader_instructeur" name="kader_instructeur" class="form-control" required>
+            <input type="text" id="kader_instructeur" name="kader_instructeur" class="form-control" value="{{ old('kader_instructeur') }}" required>
         </div>
         <div class="form-group">
             <label for="max_users">Maximaal aantal deelnemers:</label>
-            <input type="text" id="max_users" name="max_users" class="form-control" required>
+            <input type="text" id="max_users" name="max_users" class="form-control" value="{{ old('max_users') }}" required>
         </div>
 
         <div class="form-group">
             <label for="speellocatie_naam">Speellocatie naam:</label>
-            <input type="text" id="speellocatie_naam" name="speellocatie_naam" class="form-control" required>
+            <input type="text" id="speellocatie_naam" name="speellocatie_naam" class="form-control" value="{{ old('speellocatie_naam') }}" required>
         </div>
 
         <h2>Adres speellocatie:</h2>
         <div class="form-group">
             <label for="city">Stad:</label>
-            <input type="text" id="city" name="speellocatie[city]" class="form-control" required>
+            <input type="text" id="city" name="speellocatie[city]" class="form-control" value="{{ old('speellocatie.city') }}" required>
         </div>
         <div class="form-group">
             <label for="street">Straat:</label>
-            <input type="text" id="street" name="speellocatie[street]" class="form-control" required>
+            <input type="text" id="street" name="speellocatie[street]" class="form-control" value="{{ old('speellocatie.street') }}" required>
         </div>
         <div class="form-group">
             <label for="house_number">Huisnummer:</label>
-            <input type="text" id="house_number" name="speellocatie[house_number]" class="form-control" required>
+            <input type="text" id="house_number" name="speellocatie[house_number]" class="form-control" value="{{ old('speellocatie.house_number') }}" required>
         </div>
         <div class="form-group">
             <label for="postcode">Postcode:</label>
-            <input type="text" id="postcode" name="speellocatie[postcode]" class="form-control" required>
+            <input type="text" id="postcode" name="speellocatie[postcode]" class="form-control" value="{{ old('speellocatie.postcode') }}" required>
         </div>
         <h2>Grime adres:</h2>
         <div class="form-check">
@@ -77,19 +77,19 @@
         <div class="griemadres-container" id="griemadres">
             <div class="form-group">
                 <label for="city">Stad:</label>
-                <input type="text" id="city" name="griemlocatie[city]" class="form-control">
+                <input type="text" id="city" name="griemlocatie[city]" class="form-control" value="{{ old('griemlocatie.postcode') }}">
             </div>
             <div class="form-group">
                 <label for="street">Straat:</label>
-                <input type="text" id="street" name="griemlocatie[street]" class="form-control">
+                <input type="text" id="street" name="griemlocatie[street]" class="form-control" value="{{ old('griemlocatie.postcode') }}">
             </div>
             <div class="form-group">
                 <label for="house_number">Huisnummer:</label>
-                <input type="text" id="house_number" name="griemlocatie[house_number]" class="form-control">
+                <input type="text" id="house_number" name="griemlocatie[house_number]" class="form-control" value="{{ old('griemlocatie.postcode') }}">
             </div>
             <div class="form-group">
                 <label for="postcode">Postcode:</label>
-                <input type="text" id="postcode" name="griemlocatie[postcode]" class="form-control">
+                <input type="text" id="postcode" name="griemlocatie[postcode]" class="form-control" value="{{ old('griemlocatie.postcode') }}">
             </div>
         </div>
 
