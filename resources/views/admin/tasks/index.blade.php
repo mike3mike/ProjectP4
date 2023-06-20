@@ -32,7 +32,12 @@
         <tbody>
           
             @foreach ($tasks as $task)
-      
+            <?php switch ($task->status) {
+                case "inBehandeling":
+                    $task->status = "in behandeling";
+                    break;
+            }
+            echo "okdan"; ?>
                     <tr>
                         <td>{{ $task->task_name }}</td>
                         <td>{{ $task->date }}</td>
