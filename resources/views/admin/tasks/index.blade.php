@@ -12,6 +12,7 @@
             {{ session('error') }}
         </div>
     @endif
+    <h1 class="my-3">Beheer van opdrachten</h1>
     <div class="input-group mb-3">
         <input id="taskSearch" type="text" class="form-control" placeholder="Zoeken naar opdrachten">
         <div class="input-group-append">

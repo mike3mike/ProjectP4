@@ -19,6 +19,8 @@
         <thead>
             <tr>
                 <th>Opdrachtnummer</th>
+                <th>Opdrachtnaam</th>
+                <th>Datum</th>
                 <th>status</th>
                 <th>Toelaten</th>
                 <th>Acties</th>
@@ -30,6 +32,8 @@
 
             <tr>
                 <td>{{ $userTask->task_id }}</td>
+                <td>{{ $userTask->task->task_name}}</td>
+                <td>{{ $userTask->task->date}}</td>
                 <td> @if($userTask->status === null)
                     Nog niet beslist
                     @elseif($userTask->status !== null)

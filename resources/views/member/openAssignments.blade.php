@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1 class="my-3">Uitnodigingen</h1>
+    <h1 class="my-3">Openstaande opdrachten</h1>
     <a href="{{ route('member.check_client_status') }}" class="btn btn-primary">Nieuwe Opdracht</a>
     @if (session('status'))
     <div class="alert alert-success">
@@ -19,6 +19,8 @@
         <thead>
             <tr>
                 <th>Opdrachtnummer</th>
+                <th>Opdrachtnaam</th>
+                <th>Datum</th>
                 <th>status</th>
                 <th>Toelaten</th>
                 <th>Acties</th>
@@ -30,6 +32,8 @@
             @if($userTask->admit ===null AND $userTask->status === null)
             <tr>
                 <td>{{ $userTask->task_id }}</td>
+                <td>{{ $userTask->task->task_name}}</td>
+                <td>{{ $userTask->task->date}}</td>
                 <td> @if($userTask->status === null)
                     Nog niet beslist
                     @elseif($userTask->status !== null)
