@@ -38,9 +38,9 @@ class TaskCreated extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('Er is een nieuwe taak aangemaakt.')
-                    ->action('Bekijk de taak', route('/admin/new-assignments'))
-                    ->line('Bedankt voor het gebruiken van onze applicatie!');
+            ->line('Er is een nieuwe taak aangemaakt.')
+            ->action('Bekijk de taak', url('/client/task'))
+            ->line('Bedankt voor het gebruiken van onze applicatie!');
     }
 
     /**
