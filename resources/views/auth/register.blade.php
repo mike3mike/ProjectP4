@@ -175,7 +175,7 @@
                         <div class="form-group">
                             <div>
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Registreer') }}
                                 </button>
                             </div>
                         </div>

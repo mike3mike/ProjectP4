@@ -69,7 +69,7 @@
             <label for="postcode">Postcode:</label>
             <input type="text" id="postcode" name="speellocatie[postcode]" class="form-control" required>
         </div>
-        <h2>Griemadres:</h2>
+        <h2>Grime adres:</h2>
         <div class="form-check">
             <input class="form-check-input" type="checkbox" value="1" id="same_address" name="same_address">
             <label class="form-check-label" for="same_address">Gelijk aan speellocatie adres</label>

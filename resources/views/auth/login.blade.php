@@ -21,7 +21,7 @@
         <br>
       @csrf
       <div class="form-group">
-         <input id="email" type="text" placeholder="&#xf007;  emailaddress" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+         <input id="email" type="text" placeholder="&#xf007;  emailadres" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
              @error('email')
                  <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -29,7 +29,7 @@
             @enderror
       </div>
       <div class="password-container">
-        <input id="password" type="password" placeholder="&#xf023;  password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+        <input id="password" type="password" placeholder="&#xf023;  wachtwoord" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
         <i class="toggle-password fas fa-eye" onclick="togglePasswordVisibility('password', this)"></i>    
         @error('password')
                 <span class="invalid-feedback" role="alert">
@@ -37,11 +37,11 @@
                 </span>
             @enderror
      </div> 
-      <button type="submit">LOGIN</button>
+      <button type="submit">INLOGGEN</button>
       <p class="message"></p>
     </form>
     <form class="login-form">
-        <button type="button" onclick="window.location.href='{{ route('register') }}'">SIGN UP</button>
+        <button type="button" onclick="window.location.href='{{ route('register') }}'">AANMELDEN</button>
     </form>    
     <a href="{{ route('password.request') }}" class="password-reset-link">Wachtwoord Vergeten</a>
 
