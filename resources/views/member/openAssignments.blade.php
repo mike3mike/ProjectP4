@@ -26,7 +26,7 @@
         </thead>
         <tbody>
             @foreach ($userTasks as $userTask)
-            @if($userTask->admit ===null)
+            @if($userTask->admit ===null AND $userTask->status === null)
             <tr>
                 <td>{{ $userTask->task_id }}</td>
                 <td> @if($userTask->status === null)
