@@ -85,9 +85,7 @@
                   </a>
                   <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
-                      <a href="#" class="dropdown-item">
-                          bekijk profiel
-                      </a>
+
                       <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown-item">
                           uitloggen
                       </a>
@@ -103,7 +101,7 @@
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
           <!-- Brand Logo -->
-          <a href="index3.html" class="brand-link">
+          <a class="brand-link">
               <img src="https://lotuskringhwg.nl/wp-content/uploads/2020/09/cropped-logo-192x192.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8 ">
               <span class="brand-text font-weight-light">LOTUS</span>
           </a>
@@ -181,13 +179,7 @@
                                           </a>
                                       </li>
                                   </ul>
-                                  <ul class="nav nav-treeview">
-                                      <li class="nav-item">
-                                          <a href="/admin/members" class="nav-link ">
-                                              <p>beheren</p>
-                                          </a>
-                                      </li>
-                                  </ul>
+
 
 
                               </li>
@@ -296,7 +288,7 @@
               <div class="container-fluid">
                   <div class="row mb-2">
                       <div class="col-sm-6">
-                          <h1 class="m-0">Dashboard</h1>
+                          <h1 class="m-0"></h1>
                       </div><!-- /.col -->
 
                   </div><!-- /.row -->

@@ -26,21 +26,23 @@
         </thead>
         <tbody>
             @foreach ($userTasks as $userTask)
+            @if($userTask->admit ===null AND $userTask->status === null)
             <tr>
                 <td>{{ $userTask->task_id }}</td>
                 <td> @if($userTask->status === null)
                     Nog niet beslist
-                @elseif($userTask->status !== null)
-                {{$userTask->status}}
-                @endif</td>
-                
+                    @elseif($userTask->status !== null)
+                    {{$userTask->status}}
+                    @endif
+                </td>
+
                 <td>
                     @if($userTask->admit === null)
-                        Nog niet bekend
+                    Nog niet bekend
                     @elseif($userTask->admit == 0)
                     Niet Goedgekeurd
                     @elseif($userTask->admit == 1)
-                        Goedgekeurd
+                    Goedgekeurd
                     @endif
                 </td>
                 <td>
@@ -60,6 +62,7 @@
                     @endif
                 </td>
             </tr>
+            @endif
             @endforeach
         </tbody>
     </table>

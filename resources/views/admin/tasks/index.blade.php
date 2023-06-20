@@ -32,11 +32,10 @@
         <tbody>
           
             @foreach ($tasks as $task)
-      
                     <tr>
                         <td>{{ $task->task_name }}</td>
                         <td>{{ $task->date }}</td>
-                        <td>{{ $task->status }}</td>
+                        <td>{{ $task->status == "inBehandeling" ? "in behandeling" : $task->status }}</td>
                         <td>{{ $taskAdmits[$task->id] }}/{{ $task->max_users }}</td>
                         <td>{{ $task->userTasks->where('admit', 0)->count() }}</td>
                         <td>
