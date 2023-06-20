@@ -17,6 +17,7 @@ class AdminTaskController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('role:coordinator');
+        $this->middleware('approved_for_role:coordinator');
     }
     
 public function invite(Task $task)

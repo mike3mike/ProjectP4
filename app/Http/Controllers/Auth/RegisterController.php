@@ -107,11 +107,11 @@ protected function create(array $data)
             'phone_number' => $data['phoneNumber'],
         ]);
 
-        if ($data['role'] == 'coordinator') {
-            $role = Role::where('name', 'lid')->firstOrFail();
-            // Rol toewijzen aan gebruiker
-            $user->roles()->attach($role);
-        }
+        // if ($data['role'] == 'coordinator') {
+        //     $role = Role::where('name', 'lid')->firstOrFail();
+        //     // Rol toewijzen aan gebruiker
+        //     $user->roles()->attach($role);
+        // }
             // Rol ophalen
             $role = Role::where('name', $data['role'])->firstOrFail();
             // Rol toewijzen aan gebruiker

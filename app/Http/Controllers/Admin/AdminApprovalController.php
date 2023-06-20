@@ -15,6 +15,7 @@ class AdminApprovalController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('role:coordinator'); // Zorg ervoor dat alleen coördinators toegang hebben
+        $this->middleware('approved_for_role:coordinator');
     }
 
     public function index()
@@ -54,7 +55,7 @@ class AdminApprovalController extends Controller
     public function approveCoordinator(User $user)
     {
         $user->is_approved_coordinator = true;
-        $user->is_approved_member = true;
+        // $user->is_approved_member = true;
         $user->save(); // Keur de coördinator goed en sla het op
         $user->notify(new UserApproved());
         return back()->with('status', 'Coördinator goedgekeurd.'); // Keer terug naar de vorige pagina met een succesbericht
