@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
@@ -22,20 +23,20 @@ class AdminApprovalController extends Controller
         $members = User::whereHas('roles', function ($query) {
             $query->where('name', 'lid');
         })->where('is_approved_member', false)->get();
-    
+
         $clients = User::whereHas('roles', function ($query) {
             $query->where('name', 'opdrachtgever');
         })->where('is_approved_client', false)->get();
-    
+
         $coordinators = User::whereHas('roles', function ($query) {
             $query->where('name', 'coordinator');
         })->where('is_approved_coordinator', false)->get();
-    
+
         return view('admin.approvals.index', compact('members', 'clients', 'coordinators')); // Toon de view met deze gebruikers
     }
 
-  
-   public function approveMember(User $user)
+
+    public function approveMember(User $user)
     {
         $user->is_approved_member = true;
         $user->save(); // Keur de lid goed en sla het op
@@ -75,6 +76,18 @@ class AdminApprovalController extends Controller
 
         return view('admin.approvals.newAssignmentOverview', compact('tasks')); // Toon de view met de opdrachten
     }
+    public function getUsers()
+    {
+        $users = User::get(); // Haal de opdrachten op die nog niet geaccepteerd zijn
+        return view('admin.users.index', compact('users')); // Toon de view met de opdrachten
+    }
+    public function deleteUser(User $user)
+    {
+        $user->delete();
+
+        return back()->with('status', 'user verwijderd'); // Keer terug naar de vorige pagina met een succesbericht
+
+    }
 
     public function approveAssignment(Task $task)
     {
@@ -84,6 +97,4 @@ class AdminApprovalController extends Controller
         $user->notify(new AssignmentApproved($task));
         return back()->with('status', 'Opdracht goedgekeurd.'); // Keer terug naar de vorige pagina met een succesbericht
     }
-    
 }
-

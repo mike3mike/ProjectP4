@@ -179,6 +179,13 @@
                                           </a>
                                       </li>
                                   </ul>
+                                  <ul class="nav nav-treeview">
+                                      <li class="nav-item">
+                                          <a href="/admin/users/" class="nav-link ">
+                                              <p>beheren</p>
+                                          </a>
+                                      </li>
+                                  </ul>
 
 
 
