@@ -85,9 +85,7 @@
                   </a>
                   <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
-                      <a href="#" class="dropdown-item">
-                          bekijk profiel
-                      </a>
+
                       <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown-item">
                           uitloggen
                       </a>
@@ -181,13 +179,7 @@
                                           </a>
                                       </li>
                                   </ul>
-                                  <ul class="nav nav-treeview">
-                                      <li class="nav-item">
-                                          <a href="/admin/members" class="nav-link ">
-                                              <p>beheren</p>
-                                          </a>
-                                      </li>
-                                  </ul>
+
 
 
                               </li>
