@@ -37,7 +37,7 @@
                         <td>{{ $task->playAddress->street_name}}, {{ $task->playAddress->city }}, {{ $task->playAddress->postal_code }}, {{ $task->playAddress->house_number }}</td>
                         <td>{{ $filledSeats }} / {{ $task->max_users }}</td>
                         <td>{{ $task->date }}</td>
-                        <td>{{ $task->status }}</td>
+                        <td>{{ $task->status == "inBehandeling" ? "in behandeling" : $task->status }}</td>
                         <td>
                             @if ($task->status === 'inBehandeling')
                                 <form action="{{ route('admin.approvals.approveAssignment', $task) }}" method="post">
@@ -124,7 +124,7 @@
                         <td>{{ $task->playAddress->street_name}}, {{ $task->playAddress->city }}, {{ $task->playAddress->postal_code }}, {{ $task->playAddress->house_number }}</td>
                         <td>{{ $task->userTasks()->where('admit', true)->where('status', 'geaccepteerd')->count()}} / {{$task-> max_users}}</td>
                         <td>{{ $task->date }}</td>
-                        <td>{{ $task->status }}</td>
+                        <td>{{ $task->status == "inBehandeling" ? "in behandeling" : $task->status }}</td>
                         <td>
                             @if ($task->status === 'inBehandeling')
                                 <form action="{{ route('admin.approvals.approveAssignment', $task) }}" method="post">
@@ -177,7 +177,7 @@
                 @foreach ($tasks as $task)
                     <tr>
                         <td>{{ $task->id }}</td>
-                        <td>{{ $task->status }}</td>
+                        <td>{{ $task->status == "inBehandeling" ? "in behandeling" : $task->status }}</td>
                         <td>
                             @if ($task->status === 'inBehandeling')
                                 <form action="{{ route('admin.approvals.approveAssignment', $task) }}" method="post">
