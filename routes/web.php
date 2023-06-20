@@ -41,6 +41,8 @@ Route::middleware(['auth', 'role:coordinator'])->group(function () {
     Route::get('/admin/new-assignments', [AdminApprovalController::class, 'getAssignmentRequests'])->name('admin.approvals.getAssignmentsRequests');
     Route::post('/admin/new-assignments/{task}', [AdminApprovalController::class, 'approveAssignment'])->name('admin.approvals.approveAssignment');
     Route::get('/admin/new-assignments/{task}', [AdminApprovalController::class, 'inviteMember'])->name('admin.approvals.inviteMember');
+    Route::get('/admin/users/', [AdminApprovalController::class, 'getUsers'])->name('admin.users.index');
+    Route::post('/admin/users/index/delete', [AdminApprovalController::class, 'deleteUser'])->name('admin.users.index.delete');
     Route::get('/admin/task/{id}', [AdminTaskController::class, 'showAdmin'])->name('task.show_task_details_admin');
     Route::get('/admin/{task}/invite', [AdminTaskController::class, 'invite'])->name('admin.invite');
     Route::post('/admin/{task}/invite', [AdminTaskController::class, 'sendInvitation'])->name('admin.sendInvitation');
@@ -64,6 +66,7 @@ Route::middleware(['auth', 'role: lid, coordinator'])->group(function () {
     Route::get('/member/open-assignments', [UserController::class, 'index'])->name('member.openAssignments.index');
     Route::post('/member/open-assignments/accept/{userTask}', [UserController::class, 'accept'])->name('member.openAssignments.accept');
     Route::post('/member/open-assignments/maybe/{userTask}', [UserController::class, 'maybe'])->name('member.openAssignments.maybe');
+    Route::post('/member/open-assignments/decline/{userTask}', [UserController::class, 'decline'])->name('member.openAssignments.decline');
     Route::post('/member/open-assignments/decline/{userTask}', [UserController::class, 'decline'])->name('member.openAssignments.decline');
     Route::post('/member/become_client', [UserController::class, 'submitBecomeClient'])->name('task.submit_become_client');
     Route::get('/member/become_client', [UserController::class, 'memberBecomeClient'])->name('member.become_client');
