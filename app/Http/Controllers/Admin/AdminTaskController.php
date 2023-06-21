@@ -97,5 +97,34 @@ public function finishTask(Task $task)
 
     return redirect()->back()->with('status', 'De opdracht is succesvol afgerond en de opdrachtgever is genotificeerd!');
 }
+public function pendingAssignments()
+{
+    // Verzamel alle opdrachten die 'inBehandeling' of 'lopend' zijn.
+    $tasks = Task::where('status', 'inBehandeling')
+                    ->orWhere('status', 'lopend')
+                    ->get();
+
+    // Geef de view weer met de opdrachten.
+    return view('admin.approvals.pendingAssignments', compact('tasks'));
+}
+public function completedAssignments()
+{
+    // Verzamel alle afgeronde opdrachten.
+    $tasks = Task::where('status', 'afgerond')->get();
+
+    // Geef de view weer met de opdrachten.
+    return view('admin.approvals.completedAssignments', compact('tasks'));
+}
+
+public function allAssignments()
+{
+    // Verzamel alle opdrachten.
+    $tasks = Task::all();
+
+    // Geef de view weer met de opdrachten.
+    return view('admin.approvals.allAssignments', compact('tasks'));
+}
+
+
 
 }
