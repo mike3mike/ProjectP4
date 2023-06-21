@@ -17,6 +17,7 @@
                 <tr>
                     <th>Opdrachtnaam</th>
                     <th>Opdrachtnummer</th>
+                    <th>Speeladres</th>
                     <th>Datum</th>
                     <th>Status</th>
                     <th>Acties</th>
@@ -28,6 +29,7 @@
                 <tr>
                     <td>{{ $task->task_name }}</td>
                     <td>{{ $task->id }}</td>
+                    <td>{{ $task->playAddress->street_name}}, {{ $task->playAddress->city }}, {{ $task->playAddress->postal_code }}, {{ $task->playAddress->house_number }}</td>
                     <td>{{ $task->date }}</td>
                     <td>{{ $task->status == "inBehandeling" ? "in behandeling" : $task->status }}</td>
 

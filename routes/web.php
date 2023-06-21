@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PlayformController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -31,6 +32,18 @@ Auth::routes();
 Route::get('/approval-pending', function () {
     return view('admin.approvals.approval_pending');
 });
+Route::get('/profile/{user}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+// Word een opdrachtgever
+// Route::get('/user/{user}/become-client', [ProfileController::class, 'submitBecomeClient'])->name('becomeClient');
+Route::get('/task/submit-become-client', [ProfileController::class, 'memberBecomeClient'])->name('become_client_form');
+Route::post('/task/submit-become-client', [ProfileController::class, 'submitBecomeClient'])->name('submit_become_client');
+
+// Word een lid
+Route::get('/user/{user}/become-member', [ProfileController::class, 'submitBecomeMember'])->name('becomeMember');
+
+// Word een coördinator
+Route::get('/user/{user}/become-coordinator', [ProfileController::class, 'submitBecomeCoordinator'])->name('becomeCoordinator');
+
 
 Route::middleware(['auth', 'role:coordinator'])->group(function () {
     // Route::get('/', [AdminApprovalController::class, 'index'])->name('admin.approvals.index');

@@ -9,7 +9,7 @@
     @endif
     <div class="d-flex justify-content-between mb-3">
         <h1>Opdrachten</h1>
-        <a href="{{ route('task.submit_become_client') }}" class="btn btn-primary">Nieuwe Opdracht</a>
+        {{-- <a href="{{ route('task.submit_become_client') }}" class="btn btn-primary">Nieuwe Opdracht</a> --}}
     </div>
     <div class="card-body table-responsive p-0">
 
@@ -18,6 +18,7 @@
                 <tr>
                     <th>Opdracht naam</th>
                     <th>Opdrachtnummer</th>
+                    <th>Speeladres</th>
                     <th>Datum</th>
                     <th>Status</th>
                     <th>Opties</th>
@@ -29,6 +30,7 @@
                 <tr>
                     <td>{{ $task->task_name }}</td>
                     <td>{{ $task->task_id }}</td>
+                    <td>{{ $task->playAddress->street_name}}, {{ $task->playAddress->city }}, {{ $task->playAddress->postal_code }}, {{ $task->playAddress->house_number }}</td>
                     <td>{{ $task->date}}</td>
                     <td>{{ $task->status }}</td>
 

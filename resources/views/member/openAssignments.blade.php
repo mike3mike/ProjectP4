@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1 class="my-3">Openstaande opdrachten</h1>
-    <a href="{{ route('member.check_client_status') }}" class="btn btn-primary">Nieuwe opdracht</a>
+    {{-- <a href="{{ route('member.check_client_status') }}" class="btn btn-primary">Nieuwe opdracht</a> --}}
     @if (session('status'))
     <div class="alert alert-success">
         {{ session('status') }}
@@ -21,6 +21,7 @@
                 <tr>
                     <th>Opdrachtnummer</th>
                     <th>Opdracht naam</th>
+                    <th>Speeladres</th>
                     <th>Datum</th>
                     <th>Status</th>
                     <th>Toelaten</th>
@@ -34,6 +35,7 @@
                 <tr>
                     <td>{{ $userTask->task_id }}</td>
                     <td>{{ $userTask->task->task_name}}</td>
+                    <td>{{$userTask->task->playAddress->street_name}}, {{ $userTask->task->playAddress->city }}, {{ $userTask->task->playAddress->postal_code }}, {{$userTask->task->playAddress->house_number }}</td>
                     <td>{{ $userTask->task->date}}</td>
                     <td> @if($userTask->status === null)
                         Nog niet beslist

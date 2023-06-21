@@ -82,7 +82,7 @@
                   <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
               </div>
           </li> --}}
-              <li class="nav-item dropdown">
+              {{-- <li class="nav-item dropdown">
                   <a class="nav-link" data-toggle="dropdown" href="#">
                       <i class="far fa-user"></i>
                   </a>
@@ -97,7 +97,26 @@
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                       @csrf
                   </form>
-              </li>
+              </li> --}}
+              <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                   
+                    <span>{{ Auth::user()->name }}</span> <!-- Gebruikersnaam wordt hier weergegeven -->
+                    <i class="far fa-user"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <a href="{{ route('profile.edit', Auth::user()->id) }}" class="dropdown-item">
+                        Profiel  <!-- Link naar profielbewerking -->
+                    </a>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown-item">
+                        Uitloggen
+                    </a>
+                </div>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </li>
+            
 
           </ul>
       </nav>
