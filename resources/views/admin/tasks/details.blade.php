@@ -27,7 +27,7 @@
                 <dd class="col-sm-9">{{ $userTask->status }}</dd>
 
                 <dt class="col-sm-3">Toelaten</dt>
-                <dd class="col-sm-9">{{ $userTask->admit ? 'Goedgekeurd' : 'Nog Niet Goedgekeurd' }}</dd>
+                <dd class="col-sm-9">{{ $userTask->admit ? 'Goedgekeurd' : 'Nog niet goedgekeurd' }}</dd>
             </dl>
         </div>
     </div>

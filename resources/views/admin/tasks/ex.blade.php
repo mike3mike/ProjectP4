@@ -40,7 +40,7 @@
                         @elseif($userTask->status !== null)
                         {{$userTask->status}}
                         @endif</td>
-                        <td>{{ $userTask->admit ? 'Goedgekeurd' : 'Nog Niet Goedgekeurd' }}</td>
+                        <td>{{ $userTask->admit ? 'Goedgekeurd' : 'Nog niet goedgekeurd' }}</td>
                         <td>{{ $taskAdmits}}/{{ $task->max_users }}</td>
                         <td>
                             @if($task->status !== 'afgerond')
