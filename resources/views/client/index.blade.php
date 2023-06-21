@@ -15,7 +15,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Opdrachtvnaam</th>
+                    <th>Opdracht naam</th>
                     <th>Opdrachtnummer</th>
                     <th>Datum</th>
                     <th>Status</th>
