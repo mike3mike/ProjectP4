@@ -10,6 +10,7 @@ use App\Models\UserTask;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\InvitationSent;
 use App\Notifications\TaskFinished;
+use App\Notifications\TaskRejected;
 
 class AdminTaskController extends Controller
 {
@@ -127,6 +128,8 @@ public function allAssignments()
 public function destroy(Task $task)
 {
     $task->delete();
+    $user = User::find($task->client_id);
+    $user->notify(new TaskRejected($task));
     return back()->with('status', 'Opdracht succesvol verwijderd');
 }
 

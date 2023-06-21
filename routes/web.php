@@ -62,7 +62,7 @@ Route::middleware(['auth', 'role:coordinator'])->group(function () {
     Route::get('/admin/all-assignments', [AdminTaskController::class, 'allAssignments'])->name('admin.allAssignments');
     Route::get('/admin/users/{user}/show', [AdminMemberTaskController::class, 'show'])->name('admin.users.show');
     Route::delete('/admin/users/{user}', [AdminMemberTaskController::class, 'destroy'])->name('admin.users.destroy');
-    Route::delete('/admin/task/{task}/delete', [AdminTaskController::class, 'destroy'])->name('admin.tasks.destroy');
+    Route::delete('/admin/task/{task}', [AdminTaskController::class, 'destroy'])->name('admin.tasks.destroy');
 
 });
 Route::get('/', [HomeController::class, 'index']);
