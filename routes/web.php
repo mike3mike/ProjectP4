@@ -56,6 +56,9 @@ Route::middleware(['auth', 'role:coordinator'])->group(function () {
     Route::post('/admin/tasks/{task}/finish', [AdminTaskController::class, 'finishTask'])->name('admin.finishTask');
     // test
     Route::get('/admin/tasks/{task}/showTask', [AdminMemberTaskController::class, 'showTask'])->name('admin.tasks.showTask');
+    Route::get('/admin/pending-assignments', [AdminTaskController::class, 'pendingAssignments'])->name('admin.pendingAssignments');
+    Route::get('/admin/completed-assignments', [AdminTaskController::class, 'completedAssignments'])->name('admin.completedAssignments');
+    Route::get('/admin/all-assignments', [AdminTaskController::class, 'allAssignments'])->name('admin.allAssignments');
 });
 Route::get('/', [HomeController::class, 'index']);
 Route::middleware(['auth', 'role: lid, coordinator'])->group(function () {
@@ -81,6 +84,7 @@ Route::middleware(['auth', 'role:opdrachtgever'])->group(function () {
     Route::get('/client/task/{id}', [ClientController::class, 'show'])->name('task.show');
     Route::get('/client/task/{id}/download', [PlayformController::class, 'downloadPlayform'])->name('task.download');
 });
+
 
 // Route::get('downloadPDF', function(){
 //     return view('playformview');
