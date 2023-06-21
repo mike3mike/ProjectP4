@@ -62,11 +62,22 @@
                             @else
                             <p class="text-danger">Fout</p>
                             @endif
-                    </td>
-                    <td>
-                        <a href="{{ route('task.show_task_details_admin', $task->id) }}" class="btn btn-info">Details</a>
-                    </td>
-                </tr>
+                        </td>
+                        <td>
+                            @if ($task->status === 'inBehandeling')
+                                <form action="{{ route('admin.tasks.destroy', $task) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger"  onclick="confirmDeletion(event, this.parentElement);">Verwijderen</button>
+                                </form>
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{ route('task.show_task_details_admin', $task->id) }}" class="btn btn-info">Details</a>
+                        </td>
+                     
+                        
+                    </tr>
                 @endforeach
             </tbody>
         </table>
@@ -91,7 +102,26 @@
             }
         });
     };
-</script>
-
-@endsection
+    </script>
+    
+    @endsection
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDeletion(event, form) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Weet je het zeker?',
+            text: "Je zult deze actie niet kunnen terugdraaien!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ja, verwijder het!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        })
+    }
+    </script>    
 @endsection

@@ -16,11 +16,11 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Opdrachtnaam</th>
+                    <th>Opdracht naam</th>
                     <th>Opdrachtnummer</th>
                     <th>Datum</th>
                     <th>Status</th>
-                    <th>Acties</th>
+                    <th>Opties</th>
 
                 </tr>
             </thead>
@@ -33,7 +33,7 @@
                     <td>{{ $task->status }}</td>
 
                     <td>
-                        <a href="{{ route('task.show', $task->id) }}" class="btn btn-info">Bekijk Details</a>
+                        <a href="{{ route('task.show', $task->id) }}" class="btn btn-info">Bekijk details</a>
                     </td>
                 </tr>
                 @endforeach

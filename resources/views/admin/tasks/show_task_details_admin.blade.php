@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1 class="my-3">Details van Opdracht {{ $task->id }}</h1>
+    <h1 class="my-3">Details van opdracht {{ $task->id }}</h1>
     <ul class="list-group">
         <li class="list-group-item">Opdracht naam: {{ $task->task_name }}</li>
         <li class="list-group-item">Opdrachtnummer: {{ $task->id }}</li>
@@ -11,11 +11,11 @@
         <li class="list-group-item">Grimelocatie adres: {{ $task->makeupAddress->street_name }} {{ $task->makeupAddress->house_number }}, {{ $task->makeupAddress->postal_code }}, {{ $task->makeupAddress->city }}</li>
         <li class="list-group-item">Bedrijfsnaam: {{ $task->client->company_name }}</li>
         <li class="list-group-item">Contactpersoon: {{ $task->client->contact_person_name }}</li>
-        <li class="list-group-item">Contactpersoon Telefoonnummer: {{ $task->client->contact_person_phone_number }}</li>
+        <li class="list-group-item">Contactpersoon telefoonnummer: {{ $task->client->contact_person_phone_number }}</li>
         <li class="list-group-item">Factuur e-mailadres: {{ $task->client->invoice_email_address }}</li>
 
         <!-- Client details -->
-        <li class="list-group-item">Opdrachtgever naam: {{ $task->client->user->name }}</li>
+        <li class="list-group-item">Naam opdrachtgever: {{ $task->client->user->name }}</li>
         <li class="list-group-item">E-mail van opdrachtgever: {{ $task->client->user->email }}</li>
         <li class="list-group-item">Telefoonnummer van opdrachtgever: {{ $task->client->user->phone_number }}</li>
         <h2 class="mt-5">Gebruikers die deelnemen aan deze opdracht:</h2>

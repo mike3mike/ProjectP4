@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1 class="my-3">Openstaande opdrachten</h1>
-    <a href="{{ route('member.check_client_status') }}" class="btn btn-primary">Nieuwe Opdracht</a>
+    <a href="{{ route('member.check_client_status') }}" class="btn btn-primary">Nieuwe opdracht</a>
     @if (session('status'))
     <div class="alert alert-success">
         {{ session('status') }}
@@ -20,11 +20,11 @@
             <thead>
                 <tr>
                     <th>Opdrachtnummer</th>
-                    <th>Opdrachtnaam</th>
+                    <th>Opdracht naam</th>
                     <th>Datum</th>
-                    <th>status</th>
+                    <th>Status</th>
                     <th>Toelaten</th>
-                    <th>Acties</th>
+                    <th>Opties</th>
                     <th>Details</th>
                 </tr>
             </thead>

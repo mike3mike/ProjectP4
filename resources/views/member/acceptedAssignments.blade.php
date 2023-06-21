@@ -19,11 +19,11 @@
         <thead>
             <tr>
                 <th>Opdrachtnummer</th>
-                <th>Opdrachtnaam</th>
+                <th>Opdracht naam</th>
                 <th>Datum</th>
                 <th>status</th>
                 <th>Toelaten</th>
-                <th>Acties</th>
+                <th>Opties</th>
             </tr>
         </thead>
         <tbody>
