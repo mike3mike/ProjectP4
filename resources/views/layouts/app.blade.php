@@ -32,6 +32,9 @@
       <nav class="main-header navbar navbar-expand navbar-white navbar-light">
           <!-- Left navbar links -->
           <ul class="navbar-nav">
+              <li class="nav-item">
+                  <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+              </li>
 
           </ul>
 
@@ -87,7 +90,7 @@
 
 
                       <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown-item">
-                          uitloggen
+                          Uitloggen
                       </a>
 
                   </div>
@@ -141,39 +144,39 @@
                                       </li>
                                   </ul> --}}
                                   <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="/admin/all-assignments" class="nav-link">
-                                            <p>Alle opdrachten</p>
-                                        </a>
-                                    </li>
-                            
-                            
-                            
-                                </ul>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="/admin/pending-assignments" class="nav-link">
-                                            <p>Aangevraagde opdrachten</p>
-                                        </a>
-                                    </li>
-                            
-                            
-                            
-                                </ul>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="/admin/completed-assignments" class="nav-link">
-                                            <p>Afgeronde opdrachten</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="/admin/tasks" class="nav-link">
-                                            <p>Aanmeldingen</p>
-                                        </a>
-                                    </li>
-                                </ul>
+                                      <li class="nav-item">
+                                          <a href="/admin/all-assignments" class="nav-link">
+                                              <p>Alle opdrachten</p>
+                                          </a>
+                                      </li>
+
+
+
+                                  </ul>
+                                  <ul class="nav nav-treeview">
+                                      <li class="nav-item">
+                                          <a href="/admin/pending-assignments" class="nav-link">
+                                              <p>Aangevraagde opdrachten</p>
+                                          </a>
+                                      </li>
+
+
+
+                                  </ul>
+                                  <ul class="nav nav-treeview">
+                                      <li class="nav-item">
+                                          <a href="/admin/completed-assignments" class="nav-link">
+                                              <p>Afgeronde opdrachten</p>
+                                          </a>
+                                      </li>
+                                  </ul>
+                                  <ul class="nav nav-treeview">
+                                      <li class="nav-item">
+                                          <a href="/admin/tasks" class="nav-link">
+                                              <p>Aanmeldingen</p>
+                                          </a>
+                                      </li>
+                                  </ul>
                                   {{-- <ul class="nav nav-treeview">
 
                                       <li class="nav-item">
@@ -354,6 +357,7 @@
       </section>
       <!-- /.content -->
       </div>
+      <div id="sidebar-overlay"></div>
       <!-- jQuery -->
       <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
       <!-- jQuery UI 1.11.4 -->

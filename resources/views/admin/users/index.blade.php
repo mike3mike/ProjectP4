@@ -13,49 +13,51 @@
         {{ session('warning') }}
     </div>
     @endif
-  
 
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Naam</th>
-                <th>Status</th>
-                <th>Telefoonnummer</th>
-                <th>Rollen</th>
-                <th>Acties</th>
-                <th>Details</th>
+    <div class="card-body table-responsive p-0">
 
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($users as $user)
-    
-
-            <tr>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->phone_number }}</td>
-                <td>
-                    {{ $user->roles->pluck('name')->join(', ') }}
-                </td>
-                <td>
-                    <form action="{{ route('admin.users.destroy', $user) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="confirmDeletion(event, this.parentElement);">Verwijderen</button>
-                    </form>
-                    
-                </td>
-                <td><a href="{{ route('admin.users.show', $user) }}" class="btn btn-success">Details</a></td>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>E-mail</th>
+                    <th>Telefoonnummer</th>
+                    <th>Rollen</th>
+                    <th>Opties</th>
+                    <th>Details</th>
 
 
-            </td>
-            </tr>
-       
-            @endforeach
-        </tbody>
-    </table>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($users as $user)
+
+
+                <tr>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->phone_number }}</td>
+                    <td>
+                        {{ $user->roles->pluck('name')->join(', ') }}
+                    </td>
+                    <td>
+                        <form action="{{ route('admin.users.destroy', $user) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="confirmDeletion(event, this.parentElement);">Verwijderen</button>
+                        </form>
+
+                    </td>
+                    <td><a href="{{ route('admin.users.show', $user) }}" class="btn btn-success">Details</a></td>
+
+
+                    </td>
+                </tr>
+
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
@@ -75,5 +77,5 @@
             }
         })
     }
-    </script>    
+</script>
 @endsection
