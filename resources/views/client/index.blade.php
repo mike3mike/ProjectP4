@@ -9,17 +9,17 @@
     @endif
     <div class="d-flex justify-content-between mb-3">
         <h1>Opdrachten</h1>
-        <a href="{{ route('task.create') }}" class="btn btn-primary">Nieuwe Opdracht</a>
+        <a href="{{ route('task.create') }}" class="btn btn-primary">Nieuwe opdracht</a>
     </div>
     <div class="card-body table-responsive p-0">
         <table class="table">
             <thead>
                 <tr>
-                    <th>Opdrachtnaam</th>
+                    <th>Opdrachtvnaam</th>
                     <th>Opdrachtnummer</th>
                     <th>Datum</th>
                     <th>Status</th>
-                    <th>Acties</th>
+                    <th>Opties</th>
 
                 </tr>
             </thead>
@@ -32,10 +32,10 @@
                     <td>{{ $task->status == "inBehandeling" ? "in behandeling" : $task->status }}</td>
 
                     <td>
-                        <a href="{{ route('task.show', $task->id) }}" class="btn btn-info">Bekijk Details</a>
+                        <a href="{{ route('task.show', $task->id) }}" class="btn btn-info">Bekijk details</a>
                         @if($task->status == 'afgerond')
                         <!-- Als dat zo is, tonen we de downloadknop. -->
-                        <a href="{{ route('task.download', $task->id) }}" class="btn btn-success">Download Speelformulier</a>
+                        <a href="{{ route('task.download', $task->id) }}" class="btn btn-success">Download speelformulier</a>
                         @endif
                     </td>
                 </tr>

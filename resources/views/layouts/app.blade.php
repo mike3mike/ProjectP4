@@ -194,7 +194,7 @@
 
                                       <li class="nav-item">
                                           <a href="/admin/new-assignments" class="nav-link">
-                                              <p>aanvragen zien</p>
+                                              <p>Aanvragen bekijken</p>
                                           </a>
                                       </li>
                                   </ul> --}}
@@ -207,7 +207,7 @@
                               <li class="nav-item menu-open">
                                   <a href="" class="nav-link ">
                                       <p>
-                                          gebruikers
+                                          Gebruikers
                                           <i class="right fas fa-angle-left"></i>
                                       </p>
 
@@ -232,7 +232,7 @@
                                   <ul class="nav nav-treeview">
                                       <li class="nav-item">
                                           <a href="/admin/users/" class="nav-link ">
-                                              <p>beheren</p>
+                                              <p>Beheren</p>
                                           </a>
                                       </li>
                                   </ul>
