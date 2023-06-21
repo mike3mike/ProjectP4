@@ -7,6 +7,7 @@ use App\Models\UserTask;
 use App\Models\Task;
 use App\Notifications\TaskStatusUpdated;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class AdminMemberTaskController extends Controller
 {
@@ -93,5 +94,16 @@ class AdminMemberTaskController extends Controller
     
         return view('admin.tasks.ex', compact('task', 'taskAdmits'));
     }
+    public function show(User $user)
+{
+    return view('admin.users.details', compact('user'));
+}
+public function destroy(User $user)
+{
+    $user->delete();
+
+    return redirect()->route('admin.users.index');
+}
+
     
 }
