@@ -124,6 +124,11 @@ public function allAssignments()
     // Geef de view weer met de opdrachten.
     return view('admin.approvals.allAssignments', compact('tasks'));
 }
+public function destroy(Task $task)
+{
+    $task->delete();
+    return back()->with('status', 'Opdracht succesvol verwijderd');
+}
 
 
 
