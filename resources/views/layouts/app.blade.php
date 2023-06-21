@@ -133,21 +133,48 @@
                                           <i class="right fas fa-angle-left"></i>
                                       </p>
                                   </a>
-                                  <ul class="nav nav-treeview">
+                                  {{-- <ul class="nav nav-treeview">
                                       <li class="nav-item">
                                           <a href="/admin/tasks" class="nav-link ">
                                               <p>Beheren</p>
                                           </a>
                                       </li>
-                                  </ul>
+                                  </ul> --}}
                                   <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="/admin/all-assignments" class="nav-link">
+                                            <p>alleOpdrachten</p>
+                                        </a>
+                                    </li>
+                            
+                            
+                            
+                                </ul>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="/admin/pending-assignments" class="nav-link">
+                                            <p>openstaandeOpdrachten</p>
+                                        </a>
+                                    </li>
+                            
+                            
+                            
+                                </ul>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="/admin/completed-assignments" class="nav-link">
+                                            <p>afgerondeOpdrachten</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                                  {{-- <ul class="nav nav-treeview">
 
                                       <li class="nav-item">
                                           <a href="/admin/new-assignments" class="nav-link">
                                               <p>aanvragen zien</p>
                                           </a>
                                       </li>
-                                  </ul>
+                                  </ul> --}}
 
                               </li>
                           </ul>
