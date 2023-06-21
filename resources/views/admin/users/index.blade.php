@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1 class="my-3">gebruikers</h1>
+    <h1 class="my-3">Gebruikers</h1>
     @if (session('status'))
     <div class="alert alert-success">
         {{ session('status') }}
@@ -24,7 +24,7 @@
                     <th>Telefoonnummer</th>
                     <th>Rollen</th>
                     <th>Opties</th>
-                    <th>Details</th>
+
 
 
                 </tr>

@@ -67,6 +67,18 @@ section {
   display: block;
 }
 
+.cross {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+
+  /* For mobile phones: */
+  .cross {
+    display: block;
+  }
+}
+
 body {
   margin: 0;
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";

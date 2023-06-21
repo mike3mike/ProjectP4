@@ -3,7 +3,6 @@
 @section('content')
 <div class="container">
     <h1 class="my-3">Geaccepteerde opdrachten</h1>
-    <p>Voor de volgende opdrachten ben je geaccepteerd.</p>
     @if (session('status'))
     <div class="alert alert-success">
         {{ session('status') }}
