@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1 class="my-3">Aangevraagde opdrachten</h1>
+    <h1 class="my-3">Afgeronde opdrachten</h1>
 
     @if (session('status'))
     <div class="alert alert-success">
