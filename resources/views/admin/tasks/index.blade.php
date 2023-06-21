@@ -24,12 +24,12 @@
         <table id="taskTable" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Taak Naam</th>
+                    <th>Opdracht naam</th>
                     <th>Datum</th>
                     <th>Status</th>
-                    <th>Gevulde Plekken</th>
+                    <th>Gevulde plekken</th>
                     <th>Aanmeldingen</th>
-                    <th>Acties</th>
+                    <th>Opties</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,7 +38,7 @@
                 <tr>
                     <td>{{ $task->task_name }}</td>
                     <td>{{ $task->date }}</td>
-                    <td>{{ $task->status == "inBehandeling" ? "in behandeling" : $task->status }}</td>
+                    <td>{{ $task->status == "inBehandeling" ? "In behandeling" : $task->status }}</td>
                     <td>{{ $taskAdmits[$task->id] }}/{{ $task->max_users }}</td>
                     <td>{{ $task->userTasks->where('admit', 0)->count() }}</td>
                     <td>

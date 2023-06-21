@@ -8,16 +8,16 @@
         </div>
         <div class="card-body">
             <dl class="row">
-                <dt class="col-sm-3">Gebruiker Naam</dt>
+                <dt class="col-sm-3">Gebruiker naam</dt>
                 <dd class="col-sm-9">{{ $userTask->user->name }}</dd>
 
-                <dt class="col-sm-3">Gebruiker Email</dt>
+                <dt class="col-sm-3">Gebruiker e-mail</dt>
                 <dd class="col-sm-9">{{ $userTask->user->email }}</dd>
 
                 <dt class="col-sm-3">Gebruiker rol</dt>
                 <dd class="col-sm-9">{{ $userTask->user->roles->pluck('name')->join(', ') }}</dd>
 
-                <dt class="col-sm-3">Taak Naam</dt>
+                <dt class="col-sm-3">Taak naam</dt>
                 <dd class="col-sm-9">{{ $userTask->task->task_name }}</dd>
 
                 <dt class="col-sm-3">Datum</dt>
