@@ -20,12 +20,12 @@
         <table id="taskTable" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Opdracht Naam</th>
+                    <th>Opdracht naam</th>
                     <th>Speeladres</th>
-                    <th>Gevulde Plekken</th>
+                    <th>Gevulde plekken</th>
                     <th>Datum</th>
                     <th>Status</th>
-                    <th>Actie</th>
+                    <th>Opties</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,7 +38,7 @@
                     <td>{{ $task->playAddress->street_name}}, {{ $task->playAddress->city }}, {{ $task->playAddress->postal_code }}, {{ $task->playAddress->house_number }}</td>
                     <td>{{ $filledSeats }} / {{ $task->max_users }}</td>
                     <td>{{ $task->date }}</td>
-                    <td>{{ $task->status == "inBehandeling" ? "in behandeling" : $task->status }}</td>
+                    <td>{{ $task->status == "inBehandeling" ? "In behandeling" : $task->status }}</td>
                     <td>
                         @if ($task->status === 'inBehandeling')
                         <form action="{{ route('admin.approvals.approveAssignment', $task) }}" method="post">
@@ -53,11 +53,11 @@
                             @elseif ($task->status === 'lopend' && $filledSeats == $task->max_users)
                             <form action="{{ route('admin.finishTask', $task) }}" method="post">
                                 @csrf
-                                <button type="submit" class="btn btn-primary">Opdracht Afronden</button>
+                                <button type="submit" class="btn btn-primary">Opdracht afronden</button>
                             </form>
                             @elseif ($task->status === 'afgerond')
                             {{-- <p class="text-success">Afgerond</p> --}}
-                            <a href="{{ route('task.download', $task->id) }}" class="btn btn-success">Download Speelformulier</a>
+                            <a href="{{ route('task.download', $task->id) }}" class="btn btn-success">Download speelformulier</a>
 
                             @else
                             <p class="text-danger">Fout</p>

@@ -22,7 +22,7 @@
 
                 @if (session('status'))
                 <div class="alert alert-success" role="alert">
-                    Wij hebben u een reset email verstuurd
+                    Er is een reset email verstuurd
                 </div>
                 @endif
                 @error('email')

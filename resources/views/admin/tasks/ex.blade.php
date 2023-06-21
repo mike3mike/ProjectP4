@@ -26,8 +26,8 @@
                     <th>Gebruiker</th>
                     <th>Status</th>
                     <th>Toelaten</th>
-                    <th>Gevulde Plekken</th>
-                    <th>Acties</th>
+                    <th>Gevulde plekken</th>
+                    <th>Opties</th>
                 </tr>
             </thead>
             <tbody>
