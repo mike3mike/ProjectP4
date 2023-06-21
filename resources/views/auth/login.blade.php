@@ -21,12 +21,15 @@
         <br>
       @csrf
       <div class="form-group">
+        @error('email')
+        <span class="invalid-feedback" role="alert">
+           <strong>De inloggegevens zijn onjuist.</strong>
+       </span>
+   @enderror
+   <br>
+   <br>
          <input id="email" type="text" placeholder="&#xf007;  emailadres" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-             @error('email')
-                 <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
+         
       </div>
       <div class="password-container">
         <input id="password" type="password" placeholder="&#xf023;  wachtwoord" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">

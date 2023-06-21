@@ -10,7 +10,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('client worden') }}</div>
+                <div class="card-header">{{ __('Opdrachtgever worden') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('task.submit_become_client') }}">
