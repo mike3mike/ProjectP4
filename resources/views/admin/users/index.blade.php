@@ -24,7 +24,7 @@
                     <th>Telefoonnummer</th>
                     <th>Rollen</th>
                     <th>Opties</th>
-                    <th>Details</th>
+
 
 
                 </tr>

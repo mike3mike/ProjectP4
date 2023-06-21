@@ -25,7 +25,7 @@
                     <th>Status</th>
                     <th>Toelaten</th>
                     <th>Opties</th>
-                    <th>Details</th>
+
                 </tr>
             </thead>
             <tbody>
