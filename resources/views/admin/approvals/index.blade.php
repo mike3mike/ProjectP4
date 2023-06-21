@@ -18,9 +18,9 @@
             <thead>
                 <tr>
                     <th>Naam</th>
-                    <th>Email</th>
+                    <th>E-mail</th>
                     <th>Rol</th>
-                    <th>Acties</th>
+                    <th>Opties</th>
                 </tr>
             </thead>
             <tbody>

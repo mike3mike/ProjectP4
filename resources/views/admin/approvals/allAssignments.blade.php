@@ -20,12 +20,12 @@
         <table id="taskTable" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Opdracht Naam</th>
+                    <th>Opdracht naam</th>
                     <th>Speeladres</th>
-                    <th>Gevulde Plekken</th>
+                    <th>Gevulde plekken</th>
                     <th>Datum</th>
                     <th>Status</th>
-                    <th>Actie</th>
+                    <th>Opties</th>
                 </tr>
             </thead>
             <tbody>
@@ -57,7 +57,7 @@
                             </form>
                             @elseif ($task->status === 'afgerond')
                             {{-- <p class="text-success">Afgerond</p> --}}
-                            <a href="{{ route('task.download', $task->id) }}" class="btn btn-success">Download Speelformulier</a>
+                            <a href="{{ route('task.download', $task->id) }}" class="btn btn-success">Download speelformulier</a>
 
                             @else
                             <p class="text-danger">Fout</p>
