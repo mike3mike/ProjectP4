@@ -14,6 +14,7 @@
     </div>
     @endif
   
+    <div class="card-body table-responsive p-0">
 
     <table class="table table-bordered table-striped">
         <thead>
@@ -56,6 +57,7 @@
             @endforeach
         </tbody>
     </table>
+    </div>
 </div>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
