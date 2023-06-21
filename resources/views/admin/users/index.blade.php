@@ -20,7 +20,7 @@
             <thead>
                 <tr>
                     <th>Naam</th>
-                    <th>Status</th>
+                    <th>E-mail</th>
                     <th>Telefoonnummer</th>
                     <th>Rollen</th>
                     <th>Opties</th>

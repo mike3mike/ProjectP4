@@ -11,12 +11,12 @@
         </ul>
     </div>
     @endif
-    <h1 class="my-3">Opdracht Informatie</h1>
+    <h1 class="my-3">Opdracht informatie</h1>
 
     <form method="post" action="{{ route('task.store') }}">
         @csrf
         <div class="form-group">
-            <label for="opdrachtnaam">Opdrachtnaam:</label>
+            <label for="opdrachtnaam">Opdracht naam:</label>
             <input type="text" id="opdrachtnaam" name="opdrachtnaam" class="form-control" value="{{ old('opdrachtnaam') }}" required>
         </div>
         <div class="form-group">
