@@ -170,6 +170,13 @@
                                           </a>
                                       </li>
                                   </ul>
+                                  <ul class="nav nav-treeview">
+                                      <li class="nav-item">
+                                          <a href="/admin/tasks" class="nav-link">
+                                              <p>Aanmeldingen</p>
+                                          </a>
+                                      </li>
+                                  </ul>
                                   {{-- <ul class="nav nav-treeview">
 
                                       <li class="nav-item">
