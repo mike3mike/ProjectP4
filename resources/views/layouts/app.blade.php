@@ -143,7 +143,7 @@
                                   <ul class="nav nav-treeview">
                                     <li class="nav-item">
                                         <a href="/admin/all-assignments" class="nav-link">
-                                            <p>alleOpdrachten</p>
+                                            <p>Alle opdrachten</p>
                                         </a>
                                     </li>
                             
@@ -153,7 +153,7 @@
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
                                         <a href="/admin/pending-assignments" class="nav-link">
-                                            <p>openstaandeOpdrachten</p>
+                                            <p>Openstaande opdrachten</p>
                                         </a>
                                     </li>
                             
@@ -163,7 +163,7 @@
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
                                         <a href="/admin/completed-assignments" class="nav-link">
-                                            <p>afgerondeOpdrachten</p>
+                                            <p>Afgeronde opdrachten</p>
                                         </a>
                                     </li>
                                 </ul>

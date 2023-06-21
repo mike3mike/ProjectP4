@@ -11,6 +11,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,6 +60,8 @@ Route::middleware(['auth', 'role:coordinator'])->group(function () {
     Route::get('/admin/pending-assignments', [AdminTaskController::class, 'pendingAssignments'])->name('admin.pendingAssignments');
     Route::get('/admin/completed-assignments', [AdminTaskController::class, 'completedAssignments'])->name('admin.completedAssignments');
     Route::get('/admin/all-assignments', [AdminTaskController::class, 'allAssignments'])->name('admin.allAssignments');
+    Route::get('/admin/users/{user}/show', [AdminMemberTaskController::class, 'show'])->name('admin.users.show');
+    Route::delete('/admin/users/{user}', [AdminMemberTaskController::class, 'destroy'])->name('admin.users.destroy');
 });
 Route::get('/', [HomeController::class, 'index']);
 Route::middleware(['auth', 'role: lid, coordinator'])->group(function () {

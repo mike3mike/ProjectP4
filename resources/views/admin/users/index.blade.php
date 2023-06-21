@@ -18,35 +18,62 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>naam</th>
-                <th>status</th>
-                <th>telefoon nummer</th>
-                <th>rollen</th>
-                <th>acties</th>
+                <th>Naam</th>
+                <th>Status</th>
+                <th>Telefoonnummer</th>
+                <th>Rollen</th>
+                <th>Acties</th>
+                <th>Details</th>
+
 
             </tr>
         </thead>
         <tbody>
             @foreach ($users as $user)
-             @if ($user->hasApprovedRole()) <!-- alleen gebruikers die al een rol hebben -->
+    
 
             <tr>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
-                <td>0{{ $user->phone_number }}</td>
-                <td></td> 
-                <td><form action="{{ route('admin.users.index.delete', $user) }}" method="post">
-                        <button type="submit" class="btn btn-success">verwijderen</button>
-                                                @csrf
+                <td>{{ $user->phone_number }}</td>
+                <td>
+                    {{ $user->roles->pluck('name')->join(', ') }}
+                </td>
+                <td>
+                    <form action="{{ route('admin.users.destroy', $user) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" onclick="confirmDeletion(event, this.parentElement);">Verwijderen</button>
+                    </form>
+                    
+                </td>
+                <td><a href="{{ route('admin.users.show', $user) }}" class="btn btn-success">Details</a></td>
 
-                    </form></td>
 
-
-
+            </td>
             </tr>
-            @endif
+       
             @endforeach
         </tbody>
     </table>
 </div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDeletion(event, form) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Weet je het zeker?',
+            text: "Je zult deze actie niet kunnen terugdraaien!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ja, verwijder het!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        })
+    }
+    </script>    
 @endsection
