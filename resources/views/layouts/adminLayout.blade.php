@@ -28,13 +28,13 @@
             <i class="right fas fa-angle-left"></i>
         </p>
     </a>
+  
     <ul class="nav nav-treeview">
         <li class="nav-item">
             <a href="/admin/tasks" class="nav-link ">
                 <p>beheren</p>
             </a>
         </li>
-
 
     </ul>
 </li>
