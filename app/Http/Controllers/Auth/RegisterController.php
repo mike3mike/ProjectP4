@@ -65,7 +65,7 @@ class RegisterController extends Controller
 {
     $rules = [
         'name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'regex:^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'regex:/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/'],
         'password' => ['required', 'string', 'min:8', 'confirmed'],
         'phoneNumber' => ['required', 'digits:10'],
         'role' => ['required', 'string', 'min:3'],
