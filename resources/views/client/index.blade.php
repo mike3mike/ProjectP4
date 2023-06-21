@@ -28,7 +28,7 @@
                 <td>{{ $task->task_name }}</td>
                 <td>{{ $task->id }}</td>
                 <td>{{ $task->date }}</td>
-                <td>{{ $task->status }}</td>
+                <td>{{ $task->status == "inBehandeling" ? "in behandeling" : $task->status }}</td>
 
                 <td>
                     <a href="{{ route('task.show', $task->id) }}" class="btn btn-info">Bekijk Details</a>
