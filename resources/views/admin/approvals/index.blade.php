@@ -40,7 +40,7 @@
                             <form action="{{ route('admin.approvals.delete', $user) }}" method="post" onsubmit="return confirm('Weet je zeker dat je deze gebruiker wilt verwijderen?');">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">Verwijderen</button>
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="confirmDeletion(event, this.parentElement);">Verwijderen</button>
                             </form>
                         </div>
                     </td>
@@ -56,4 +56,23 @@
     </div>
     @endforeach
 </div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDeletion(event, form) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Weet je het zeker?',
+            text: "Je zult deze actie niet kunnen terugdraaien!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ja, verwijder het!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        })
+    }
+    </script>    
 @endsection
