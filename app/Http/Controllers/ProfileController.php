@@ -114,9 +114,9 @@ public function submitBecomeClient(Request $request)
         })->first(); // Vind de coördinator
         $coordinator->notify(new RoleRequestNotification($role, $user)); // Stuur de notificatie
     });
-    return back()->with('success', 'Je aanvraag om opdrachtgever te worden is nog in behandeling. Wacht alstublieft op goedkeuring.');
+    // return back()->with('success', 'Je aanvraag om opdrachtgever te worden is nog in behandeling. Wacht alstublieft op goedkeuring.');
 
-    // return redirect()->route('profile.edit')->with('success', 'Je aanvraag om een opdrachtgever te worden is in behandeling genomen.');
+    return redirect()->route('profile.edit',$user->id)->with('success', 'Je aanvraag om een opdrachtgever te worden is in behandeling genomen.');
 }
 
 private function validateClientRequest($request)
@@ -136,4 +136,36 @@ public function memberBecomeClient()
 {
     return view('profile.become_client'); // Toon de view met de opdrachten die bij deze user horen
 }
+public function submitBecomeMember(Request $request)
+{
+    $user = Auth::user();
+
+    // Controleer of de gebruiker al de rol 'lid' heeft
+    if($user->hasRole('lid')) {
+        // Controleer of de aanvraag van de gebruiker al is goedgekeurd
+        if($user->is_approved_member) {
+            // Als de aanvraag van de gebruiker is goedgekeurd, stuur ze dan door naar de juiste route
+            return redirect()->route('member.openAssignments.index');
+        } else {
+            // Als de aanvraag van de gebruiker nog niet is goedgekeurd, laat ze dan weten dat ze moeten wachten op goedkeuring
+            return back()->with('info', 'Je aanvraag om lid te worden is nog in behandeling. Wacht alstublieft op goedkeuring.');
+        }
+    }
+
+    // Opslaan van de rol 'lid' voor de gebruiker
+    $role = Role::where('name', 'lid')->first();
+    $user->roles()->attach($role);
+
+    // Stel is_approved_member in op false
+    $user->is_approved_member = false;
+    $user->save();
+    $coordinator = User::whereHas('roles', function ($query) {
+        $query->where('name', 'coordinator');
+    })->first(); // Vind de coördinator
+    $coordinator->notify(new RoleRequestNotification($role, $user));
+    return back()->with('success', 'Je aanvraag om lid te worden is nog in behandeling. Wacht alstublieft op goedkeuring.');
+
+    // return redirect()->route('member.index')->with('success', 'Je aanvraag om een lid te worden is in behandeling genomen.');
+}
+
 }

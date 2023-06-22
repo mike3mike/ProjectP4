@@ -22,7 +22,8 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:lid,coordinator'); // Zorg ervoor dat alleen admins toegang hebben
+        $this->middleware('role:lid'); // Zorg ervoor dat alleen admins toegang hebben
+        $this->middleware('approved_for_role:lid');
     }
 
     public function index()

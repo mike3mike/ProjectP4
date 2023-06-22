@@ -267,7 +267,7 @@
 
 
                       {{-- @if(Auth::user()->hasRole('lid') AND Auth::user()->where('is_approved_member', true)->exists() ) --}}
-                      @if(Auth::user()->hasRole('lid') && Auth::user()->is_approved_member || (Auth::user()->hasRole('coordinator') && Auth::user()->is_approved_coordinator))
+                      @if(Auth::user()->hasRole('lid') && Auth::user()->is_approved_member)
                       <li class="nav-item menu-open">
                           <a class="nav-link ">
                               <p>

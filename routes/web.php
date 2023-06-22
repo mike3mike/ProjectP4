@@ -79,7 +79,7 @@ Route::middleware(['auth', 'role:coordinator'])->group(function () {
 
 });
 Route::get('/', [HomeController::class, 'index']);
-Route::middleware(['auth', 'role: lid, coordinator'])->group(function () {
+Route::middleware(['auth', 'role: lid'])->group(function () {
     Route::get('/member/accepted-assignments', [UserController::class, 'acceptedAssignments'])->name('member.acceptedAssignments.index');
     Route::get('/member/open-assignments', [UserController::class, 'index'])->name('member.openAssignments.index');
     Route::post('/member/open-assignments/accept/{userTask}', [UserController::class, 'accept'])->name('member.openAssignments.accept');
