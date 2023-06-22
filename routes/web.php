@@ -34,7 +34,6 @@ Route::get('/approval-pending', function () {
 });
 Route::get('/profile/{user}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 // Word een opdrachtgever
-// Route::get('/user/{user}/become-client', [ProfileController::class, 'submitBecomeClient'])->name('becomeClient');
 Route::get('/task/submit-become-client', [ProfileController::class, 'memberBecomeClient'])->name('become_client_form');
 Route::post('/task/submit-become-client', [ProfileController::class, 'submitBecomeClient'])->name('submit_become_client');
 
@@ -46,7 +45,6 @@ Route::get('/user/{user}/become-coordinator', [ProfileController::class, 'submit
 
 
 Route::middleware(['auth', 'role:coordinator'])->group(function () {
-    // Route::get('/', [AdminApprovalController::class, 'index'])->name('admin.approvals.index');
     Route::get('/admin/approvals', [AdminApprovalController::class, 'index'])->name('admin.approvals.index');
     Route::post('/admin/approvals/members/{user}', [AdminApprovalController::class, 'approveMember'])->name('admin.approvals.approveMembers');
     Route::post('/admin/approvals/clients/{user}', [AdminApprovalController::class, 'approveClient'])->name('admin.approvals.approveClients');
@@ -86,16 +84,12 @@ Route::middleware(['auth', 'role: lid'])->group(function () {
     Route::post('/member/open-assignments/maybe/{userTask}', [UserController::class, 'maybe'])->name('member.openAssignments.maybe');
     Route::post('/member/open-assignments/decline/{userTask}', [UserController::class, 'decline'])->name('member.openAssignments.decline');
     Route::post('/member/open-assignments/decline/{userTask}', [UserController::class, 'decline'])->name('member.openAssignments.decline');
-    Route::post('/member/become_client', [UserController::class, 'submitBecomeClient'])->name('task.submit_become_client');
-    Route::get('/member/become_client', [UserController::class, 'memberBecomeClient'])->name('member.become_client');
-    Route::get('/member/check_client_status', [UserController::class, 'checkClientStatus'])->name('member.check_client_status');  
+    // Route::post('/member/become_client', [UserController::class, 'submitBecomeClient'])->name('task.submit_become_client');
+    // Route::get('/member/become_client', [UserController::class, 'memberBecomeClient'])->name('member.become_client');
+    // Route::get('/member/check_client_status', [UserController::class, 'checkClientStatus'])->name('member.check_client_status');  
     Route::get('/member/{id}/showMemberTask', [UserController::class, 'showMemberTask'])->name('task.showMember');
 });
 Route::middleware(['auth', 'role:opdrachtgever'])->group(function () {
-
-    // Route::post('/', [ClientController::class, 'store'])->name('task.store');
-
-
     Route::post('/client/task', [ClientController::class, 'store'])->name('task.store');
     Route::get('/client/task', [ClientController::class, 'index'])->name('task.index');
     Route::get('/client/task/create', [ClientController::class, 'create'])->name('task.create');

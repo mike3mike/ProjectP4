@@ -34,54 +34,124 @@ class RoleRequestController extends Controller
         return view('admin.role-requests.index', compact('users'));
     }
     
-    
-    
-    
     public function approve(User $user, Role $role)
-    {
-        $roleName = strtolower($role->name);
-    
-        $user->{"is_approved_Client"} = true;
-       
-        $user->save();
-
-        $user->notify(new UserRoleApproved($role));
-
-        return redirect()->route('admin.role-requests.index')->with('success', 'Rol aanvraag goedgekeurd.');
-    }
-
-    public function deny(User $user, Role $role)
 {
     $roleName = strtolower($role->name);
-// dd($roleName);
-    // Check if the role is 'opdrachtgever'
-    if ($roleName == 'opdrachtgever') {
-        // Get the user's client record
-        $client = Client::where('user_id', $user->id)->first();
+    $approvedAttributeName = '';
 
-        if ($client) {
-            // If the client has an associated address, delete it
-            if ($client->address) {
-                $client->address->delete();
+    switch ($roleName) {
+        case 'opdrachtgever':
+            $approvedAttributeName = 'is_approved_client';
+            break;
+        case 'coordinator':
+            $approvedAttributeName = 'is_approved_coordinator';
+            break;
+        case 'lid':
+            $approvedAttributeName = 'is_approved_member';
+            break;
+        default:
+            throw new Exception("Onbekende rol: {$roleName}");
+    }
+
+    $user->$approvedAttributeName = true;
+    $user->save();
+
+    $user->notify(new UserRoleApproved($role));
+
+    return redirect()->route('admin.role-requests.index')->with('success', 'Rol aanvraag goedgekeurd.');
+}
+
+public function deny(User $user, Role $role)
+{
+    $roleName = strtolower($role->name);
+    $approvedAttributeName = '';
+
+    switch ($roleName) {
+        case 'opdrachtgever':
+            $client = Client::where('user_id', $user->id)->first();
+
+            if ($client) {
+                // If the client has an associated address, delete it
+                if ($client->address) {
+                    $client->address->delete();
+                }
+
+                // Delete the client record
+                $client->delete();
             }
 
-            // Delete the client record
-            $client->delete();
-        }
+            $approvedAttributeName = 'is_approved_client';
+            break;
+        case 'coordinator':
+            $approvedAttributeName = 'is_approved_coordinator';
+            // Add your denial logic for coordinator here.
+            break;
+        case 'lid':
+            $approvedAttributeName = 'is_approved_member';
+            // Add your denial logic for member here.
+            break;
+        default:
+            throw new Exception("Onbekende rol: {$roleName}");
     }
 
     // Detach the role from the user
     $user->roles()->detach($role->id);
 
-    $approvalAttribute = $user->getApprovalAttributeForRole($roleName);
-
-    $user->$approvalAttribute = false;
+    $user->$approvedAttributeName = false;
     $user->save();
 
     $user->notify(new UserRoleDenied($role));
 
     return redirect()->route('admin.role-requests.index')->with('success', 'Rol aanvraag geweigerd.');
 }
+
+    
+    
+//     public function approve(User $user, Role $role)
+//     {
+//         $roleName = strtolower($role->name);
+    
+//         $user->{"is_approved_Client"} = true;
+       
+//         $user->save();
+
+//         $user->notify(new UserRoleApproved($role));
+
+//         return redirect()->route('admin.role-requests.index')->with('success', 'Rol aanvraag goedgekeurd.');
+//     }
+
+//     public function deny(User $user, Role $role)
+// {
+//     $roleName = strtolower($role->name);
+// // dd($roleName);
+//     // Check if the role is 'opdrachtgever'
+//     if ($roleName == 'opdrachtgever') {
+//         // Get the user's client record
+//         $client = Client::where('user_id', $user->id)->first();
+
+//         if ($client) {
+//             // If the client has an associated address, delete it
+//             if ($client->address) {
+//                 $client->address->delete();
+//             }
+
+//             // Delete the client record
+//             $client->delete();
+//         }
+//     }
+
+//     // Detach the role from the user
+//     $user->roles()->detach($role->id);
+
+//     $approvalAttribute = $user->getApprovalAttributeForRole($roleName);
+
+//     $user->$approvalAttribute = false;
+//     $user->save();
+
+//     $user->notify(new UserRoleDenied($role));
+
+//     return redirect()->route('admin.role-requests.index')->with('success', 'Rol aanvraag geweigerd.');
+// }
 
   
 }
