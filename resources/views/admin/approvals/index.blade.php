@@ -10,7 +10,7 @@
     </div>
     @endif
 
-    @foreach (['members' => 'Leden', 'clients' => 'Opdrachtgevers', 'coordinators' => 'Coördinators'] as $role => $label)
+    @foreach (['members' => 'Leden', 'clients' => 'Opdrachtgevers', 'coordinators' => 'Coördinatoren'] as $role => $label)
     <h2>{{ $label }}</h2>
     <div class="card-body table-responsive p-0">
 

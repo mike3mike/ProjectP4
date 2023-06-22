@@ -71,7 +71,7 @@
 
     @if(!$user->hasRole('lid'))
     <div class="form-group">
-        <a href="{{ route('becomeMember',$user->id) }}" class="btn btn-primary">Word Lid</a>
+        <a href="{{ route('becomeMember',$user->id) }}" class="btn btn-primary">LOTUS lid worden</a>
     </div>
     @endif
     @if(!$user->hasRole('opdrachtgever'))
