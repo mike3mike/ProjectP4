@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="contact_person_phone" class="col-md-4 col-form-label text-md-right">{{ __('Contactpersoon Telefoon') }}</label>
+                            <label for="contact_person_phone" class="col-md-4 col-form-label text-md-right">{{ __('Telefoonnummer contactpersoon') }}</label>
 
                             <div class="col-md-6">
                                 <input id="contact_person_phone" type="text" placeholder="Voer het telefoonnummer van de contactpersoon in" class="form-control @error('contact_person_phone') is-invalid @enderror" name="contact_person_phone" value="{{ old('contact_person_phone') }}">
