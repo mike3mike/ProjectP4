@@ -100,9 +100,15 @@ class AdminMemberTaskController extends Controller
 }
 public function destroy(User $user)
 {
-    $user->delete();
+    try {
+        $user->delete();
 
-    return redirect()->route('admin.users.index');
+        return back()->with('status', 'Gebruiker verwijderd'); // Keer terug naar de vorige pagina met een succesbericht
+    } catch (\Exception $e) {
+      
+        return back()->with('error', 'Deze gebruiker heeft een actieve opdracht en kan daarom niet verwijderd worden.');
+    }
+    
 }
 
     

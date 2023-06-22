@@ -64,9 +64,15 @@ class AdminApprovalController extends Controller
 
     public function destroy(User $user)
     {
-        $user->delete(); // Verwijder de gebruiker
-
-        return back()->with('status', 'Gebruiker verwijderd.'); // Keer terug naar de vorige pagina met een succesbericht
+        try {
+            $user->delete();
+    
+            return back()->with('status', 'Gebruiker verwijderd'); // Keer terug naar de vorige pagina met een succesbericht
+        } catch (\Exception $e) {
+          
+            return back()->with('error', 'Deze gebruiker heeft een actieve opdracht en kan daarom niet verwijderd worden.');
+        }
+        
     }
 
 
@@ -81,13 +87,6 @@ class AdminApprovalController extends Controller
     {
         $users = User::get(); // Haal de opdrachten op die nog niet geaccepteerd zijn
         return view('admin.users.index', compact('users')); // Toon de view met de opdrachten
-    }
-    public function deleteUser(User $user)
-    {
-        $user->delete();
-
-        return back()->with('status', 'user verwijderd'); // Keer terug naar de vorige pagina met een succesbericht
-
     }
 
     public function approveAssignment(Task $task)
